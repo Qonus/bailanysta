@@ -1,4 +1,10 @@
 {
+    "Sidebar": {
+        "home": "Home",
+        "notifications": "Notifications",
+        "profile": "Profile",
+        "settings": "Settings"
+    },
     "HomePage": {
         "title": "Hello Bailanysta!"
     }

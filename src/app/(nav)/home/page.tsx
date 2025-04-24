@@ -4,7 +4,7 @@ export default async function Home() {
   const t = await getTranslations('HomePage');
   return (
     <div className="container">
-
+      This is Home Page
     </div>
   );
 }
