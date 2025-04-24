@@ -40,13 +40,13 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 	return (
 		<Sidebar collapsible="icon" {...props}>
 			<SidebarHeader>
-				<SidebarMenu>
+				{/* <SidebarMenu>
 					<SidebarMenuItem>
 						<SidebarMenuButton>
 							<Icons.logo />
 						</SidebarMenuButton>
 					</SidebarMenuItem>
-				</SidebarMenu>
+				</SidebarMenu> */}
 			</SidebarHeader>
 			<SidebarContent>
 				<SidebarGroup>
