@@ -16,7 +16,8 @@
         "title": "Hello Bailanysta!"
     },
     "Profile": {
-        "edit": "Edit Profile"
+        "edit": "Edit Profile",
+        "edit-description": "Make changes to your profile here. Click save when you're done."
     },
     "Settings": {},
     "Post": {

@@ -19,7 +19,7 @@ export default function EditProfileButton() {
                 <DialogHeader>
                     <DialogTitle>{t("edit")}</DialogTitle>
                     <DialogDescription>
-                        Make changes to your profile here. Click save when you&apos;re done.
+                        {t("edit-description")}
                     </DialogDescription>
                 </DialogHeader>
                 <div className="grid gap-4 py-4">
