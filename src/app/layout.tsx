@@ -1,4 +1,6 @@
 import { ThemeProvider } from "@/components/theme-provider";
+import { Theme, ThemePanel } from "@radix-ui/themes";
+import "@radix-ui/themes/styles.css";
 import type { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale } from "next-intl/server";
@@ -32,12 +34,15 @@ export default async function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ThemeProvider attribute="class" defaultTheme="system">
-          <NextIntlClientProvider>
-            {children}
-            <Toaster theme="light" />
-          </NextIntlClientProvider>
-        </ThemeProvider>
+        <Theme accentColor="violet">
+          <ThemeProvider attribute="class" defaultTheme="system">
+            <NextIntlClientProvider>
+              {children}
+              <Toaster theme="light" />
+            </NextIntlClientProvider>
+          </ThemeProvider>
+          <ThemePanel />
+        </Theme>
       </body>
     </html>
   );

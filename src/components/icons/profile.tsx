@@ -12,16 +12,15 @@ export default async function ProfileIcon({
 
     return (
         <div
-            className={cn("rounded-full overflow-hidden relative", className)}
+            className={cn("rounded-full overflow-hidden relative border-2 border-violet-500/20", className)}
             style={{ width: size, height: size }}
         // {...props}
         >
             <Image
                 src={session?.user?.image || "/default-profile-picture.png"}
-                width={100}
-                height={100}
+                width={400}
+                height={400}
                 alt="Profile picture"
-                objectFit="cover"
             />
         </div>
     );

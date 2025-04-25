@@ -9,7 +9,7 @@ import { Input } from "./ui/input";
 
 export default function EditProfileButton() {
 
-    const t = useTranslations('Profile');
+    const t = useTranslations("Profile");
     return (
         <Dialog>
             <DialogTrigger asChild>
