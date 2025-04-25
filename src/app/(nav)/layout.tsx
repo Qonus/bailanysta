@@ -1,5 +1,4 @@
-import { AppSidebar } from "@/components/sidebar";
-import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import AppSidebar from "@/components/sidebar";
 
 export default async function RootLayout({
 	children,
@@ -7,12 +6,13 @@ export default async function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<SidebarProvider>
-			<AppSidebar />
-			<SidebarInset>
-				<SidebarTrigger className="-ml-1" />
+		<div className="container flex h-screen">
+			<div className="w-17 md:w-50">
+				<AppSidebar />
+			</div>
+			<div className="flex-1">
 				{children}
-			</SidebarInset>
-		</SidebarProvider>
+			</div>
+		</div>
 	);
 }

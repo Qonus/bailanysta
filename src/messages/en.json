@@ -3,9 +3,16 @@
         "home": "Home",
         "notifications": "Notifications",
         "profile": "Profile",
-        "settings": "Settings"
+        "settings": "Settings",
+        "post": "Post",
+        "logout": "Logout"
     },
     "HomePage": {
         "title": "Hello Bailanysta!"
+    },
+    "Settings": {},
+    "Post": {
+        "title": "What's new?",
+        "placeholder": "Type here..."
     }
 }
