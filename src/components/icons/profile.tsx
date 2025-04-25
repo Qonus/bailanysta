@@ -6,7 +6,7 @@ import Image from "next/image";
 export default async function ProfileIcon({
     className,
     size = 40,
-    ...props
+    // ...props
 }: LucideProps) {
     const session = await auth();
 

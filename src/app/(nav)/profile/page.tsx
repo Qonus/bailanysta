@@ -1,5 +1,5 @@
+import EditProfileButton from "@/components/edit-profile";
 import { Icons } from "@/components/icons/icons";
-import { Button } from "@/components/ui/button";
 import { auth } from "@/lib/auth";
 import { getTranslations } from "next-intl/server";
 
@@ -20,7 +20,7 @@ export default async function Profile() {
               {session?.user?.email || "Email"}
             </p>
           </div>
-          <Button variant="outline">Edit Profile</Button>
+          <EditProfileButton />
         </div>
       </div>
     </div>
