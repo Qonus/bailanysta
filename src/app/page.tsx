@@ -1,10 +1,7 @@
-import { getTranslations } from "next-intl/server";
+import { auth } from "@/lib/auth";
+import { redirect } from "next/navigation";
 
-export default async function Home() {
-  const t = await getTranslations('HomePage');
-  return (
-    <div className="container">
-      {t('title')}
-    </div>
-  );
+export default async function Base() {
+  const session = await auth();
+  redirect(session ? '/home' : '/sign-in');
 }

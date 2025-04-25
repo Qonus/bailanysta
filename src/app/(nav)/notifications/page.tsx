@@ -4,7 +4,7 @@ export default async function Notifications() {
   const t = await getTranslations('HomePage');
   return (
     <div className="container">
-      {t('title')} 
+      {t('title')}
       This is Notifications
     </div>
   );

@@ -1,10 +1,12 @@
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu"
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@radix-ui/react-tooltip"
+import { auth } from "@/lib/auth"
 import { getTranslations } from "next-intl/server"
 import { Icons } from "./icons/icons"
+import LogoutButton from "./logout-button"
 import PostButton from "./post-button"
 import ThemeSwitcher from "./theme-switcher"
 import { Button } from "./ui/button"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "./ui/dropdown-menu"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./ui/tooltip"
 
 
 const data = {
@@ -21,7 +23,7 @@ const data = {
 			url: "/notifications",
 		},
 		{
-			icon: Icons.profile,
+			icon: Icons.user,
 			title: "profile",
 			url: "/profile",
 		},
@@ -34,46 +36,53 @@ const data = {
 }
 
 export default async function AppSidebar() {
+	const session = await auth();
+
 	const t = await getTranslations("Sidebar");
 	return (
-		<div className="size-full flex flex-col justify-between border-r-1 border-r-current/10 md:pr-10 py-5">
-
+		<div className="size-full flex flex-col justify-between border-r-1 border-r-current/10 px-4 md:px-5 py-5">
 			<div className="flex flex-col gap-3">
 				<ThemeSwitcher />
-				{data.nav.map((item) => (
-					<Button variant='ghost' className="nav-button px-10" key={item.title} asChild>
-						<a href={item.url} className="flex">
-							{item.icon && <item.icon className="size-7" />}
-							<span className="hidden md:block">{t(item.title)}</span>
-						</a>
+				<TooltipProvider>
+					{data.nav.map((item) => (
+						<Tooltip key={item.title} delayDuration={0}>
+							<TooltipTrigger asChild>
+								<Button variant='ghost' className="nav-button pl-2" asChild>
+									<a href={item.url} className="flex">
+										{item.icon && <item.icon className="size-7" />}
+										<span className="hidden md:block">{t(item.title)}</span>
+									</a>
+								</Button>
+							</TooltipTrigger>
+							<TooltipContent
+								side="right"
+								align="center"
+								sideOffset={10}
+								className="md:hidden"
+							>
+								<p className="block">{t(item.title)}</p>
+							</TooltipContent>
+						</Tooltip>
+					))}
+					<PostButton />
+				</TooltipProvider>
+			</div>
+			<DropdownMenu>
+				<DropdownMenuTrigger asChild>
+					<Button variant='ghost' className="rounded-full h-15 p-2">
+						<Icons.profile />
+						<div className="hidden md:flex flex-col text-left">
+							<p>{session?.user?.name || "Username"}</p>
+							<p className="text-sm">{session?.user?.email || "email@example.com"}</p>
+						</div>
 					</Button>
-				))}
-				<PostButton />
-			</div>
-			<div>
-				<DropdownMenu>
-					<DropdownMenuTrigger asChild>
-						<TooltipProvider>
-							<Tooltip>
-								<TooltipTrigger asChild><Button variant="ghost" className="nav-button">
-									<Icons.profile className="size-7" />
-								</Button></TooltipTrigger>
-								<TooltipContent>
-									Profile
-								</TooltipContent>
-							</Tooltip>
-						</TooltipProvider>
-
-					</DropdownMenuTrigger>
-					<DropdownMenuContent>
-						<DropdownMenuItem>
-							<Button variant="ghost">
-								{t("logout")}
-							</Button>
-						</DropdownMenuItem>
-					</DropdownMenuContent>
-				</DropdownMenu>
-			</div>
+				</DropdownMenuTrigger>
+				<DropdownMenuContent side="right">
+					<DropdownMenuItem asChild>
+						<LogoutButton />
+					</DropdownMenuItem>
+				</DropdownMenuContent>
+			</DropdownMenu>
 		</div>
 	)
 }

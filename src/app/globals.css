@@ -125,14 +125,15 @@
 @layer utilities {
   .container {
     max-width: 1200px;
-    @apply m-auto px-4 md:px-6
+    @apply m-auto
+  }
+
+  .page {
+    max-width: 900px;
+    @apply w-full px-4 md:px-6
   }
 
   .nav-button {
-    @apply rounded-full justify-start h-13 text-lg cursor-pointer w-fit
-  }
-
-  .post-button {
     @apply rounded-full h-13 text-lg cursor-pointer w-fit
   }
 }

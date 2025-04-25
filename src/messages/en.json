@@ -1,4 +1,9 @@
 {
+    "Authorization": {
+        "welcome": "Welcome to Bailanysta!",
+        "call-to-action": "First, you will need to sign into your account",
+        "continue-with": "Continue with"
+    },
     "Sidebar": {
         "home": "Home",
         "notifications": "Notifications",
@@ -8,6 +13,9 @@
         "logout": "Logout"
     },
     "HomePage": {
+        "title": "Hello Bailanysta!"
+    },
+    "Profile": {
         "title": "Hello Bailanysta!"
     },
     "Settings": {},
