@@ -1,10 +1,10 @@
 import { boolean, integer, pgTable, primaryKey, text, timestamp, varchar } from "drizzle-orm/pg-core";
 import type { AdapterAccountType } from "next-auth/adapters";
 
-export const postsTable = pgTable("posts", {
-    id: integer().primaryKey().generatedAlwaysAsIdentity(),
+export const posts = pgTable("posts", {
+    id: text("id").primaryKey().$defaultFn(() => crypto.randomUUID()),
+    userId: text("userId").notNull().references(() => users.id, { onDelete: "cascade" }),
     content: varchar({ length: 255 }).notNull(),
-    likes: integer().default(0),
 });
 
 export const users = pgTable("user", {

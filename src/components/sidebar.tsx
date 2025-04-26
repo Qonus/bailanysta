@@ -1,12 +1,12 @@
-import { auth } from "@/lib/auth"
-import { getTranslations } from "next-intl/server"
-import { Icons } from "./icons/icons"
-import LogoutButton from "./logout-button"
-import PostButton from "./post-button"
-import ThemeSwitcher from "./theme-switcher"
-import { Button } from "./ui/button"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "./ui/dropdown-menu"
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./ui/tooltip"
+import { Session } from "next-auth";
+import { getTranslations } from "next-intl/server";
+import { Icons } from "./icons/icons";
+import LogoutButton from "./logout-button";
+import PostButton from "./post-button";
+import ThemeSwitcher from "./theme-switcher";
+import { Button } from "./ui/button";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "./ui/dropdown-menu";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./ui/tooltip";
 
 
 const data = {
@@ -35,13 +35,11 @@ const data = {
 	],
 }
 
-export default async function AppSidebar() {
-	const session = await auth();
-
+export default async function AppSidebar({ session }: { session: Session }) {
 	const t = await getTranslations("Sidebar");
 	return (
 		<div className="size-full flex flex-col justify-between border-r-1 border-r-current/10 px-4 md:px-5 py-5">
-			<div className="flex flex-col gap-3">
+			<div className="items-center md:items-start flex flex-col gap-3">
 				<ThemeSwitcher />
 				<TooltipProvider>
 					{data.nav.map((item) => (

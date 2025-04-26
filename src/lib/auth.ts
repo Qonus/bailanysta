@@ -7,4 +7,10 @@ const adapter = DrizzleAdapter(db);
 export const { handlers, auth, signIn, signOut } = NextAuth({
     adapter: adapter,
     providers: [Google],
+    callbacks: {
+        async session({ session, user }) {
+            session.user.id = user.id;
+            return session;
+        }
+    }
 })

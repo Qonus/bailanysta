@@ -7,7 +7,7 @@ export default async function Profile() {
   const session = await auth();
   // const t = await getTranslations('Profile');
   return (
-    <div className="h-screen pt-20 max-w-160 m-auto">
+    <div className="h-screen px-4 pt-20 max-w-160 m-auto">
 
       <div className="pb-5 flex flex-col gap-5 border-b-1 border-b-current/10">
         <Icons.profile size={100} />

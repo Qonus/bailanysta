@@ -8,6 +8,13 @@
       "when": 1745606411824,
       "tag": "0000_previous_madrox",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1745652273977,
+      "tag": "0001_harsh_secret_warriors",
+      "breakpoints": true
     }
   ]
 }

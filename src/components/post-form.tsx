@@ -1,34 +1,21 @@
-import { cn } from "@/lib/utils";
+import { createPost } from "@/app/(nav)/posts/actions";
 import { useTranslations } from "next-intl";
-import { toast } from "sonner";
 import { Button } from "./ui/button";
 import { Textarea } from "./ui/textarea";
 
-export default function PostForm({ className }: React.ComponentProps<"form">) {
-    const t = useTranslations('Post')
+export default function PostForm() {
+    const t = useTranslations();
     return (
-        <form className={cn("grid items-start gap-4", className)}>
-            <div className="grid gap-2">
-                <Textarea placeholder={t("placeholder")} className="resize-none" />
-            </div>
+        <form action={createPost} className="flex flex-col items-end gap-5">
+            <Textarea name="content" placeholder={t("Post.placeholder")} rows={3} className="resize-none" />
             <Button
                 type="submit"
-                className="w-fit"
-                onClick={(e) => {
-                    e.preventDefault();
-
-
-
-                    toast.success(
-                        "Posted Successfully!", {
-                        description: "Your Post",
-                        action: {
-                            label: "Undo",
-                            onClick: () => console.log("Undo")
-                        }
-                    },);
-                }}>
-                Post
+                variant="default"
+                className="nav-button"
+            >
+                <p className="text-lg">
+                    {t("Sidebar.post")}
+                </p>
             </Button>
         </form>
     )

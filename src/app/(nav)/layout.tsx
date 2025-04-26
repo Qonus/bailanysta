@@ -16,7 +16,7 @@ export default async function RootLayout({
 	return (
 		<div className="container flex h-screen">
 			<div className="w-fit">
-				<AppSidebar />
+				<AppSidebar session={session} />
 			</div>
 			<div className="w-full">
 				{children}
