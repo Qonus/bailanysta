@@ -1,24 +1,25 @@
 'use server'
 
 import { auth } from "@/lib/auth";
+import { getBaseUrl } from "@/lib/utils";
 import { redirect } from "next/navigation";
 
 export async function getPosts() {
-    const data = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/posts/`);
+    const data = await fetch(`${getBaseUrl()}/api/posts/`);
     const posts = await data.json();
     return posts;
 }
 
 export async function getUserPosts(userId: string) {
-    const data = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/posts?userid=${userId}`);
+    const data = await fetch(`${getBaseUrl()}/api/posts?userid=${userId}`);
     const posts = await data.json();
     return posts;
 }
 
 export async function getPost(id: string) {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/posts/${id}`);
+    const response = await fetch(`${getBaseUrl()}/api/posts/${id}`);
     const post = await response.json();
-    // const user_response = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/users/${post.userId}`)
+    // const user_response = await fetch(`${getBaseUrl()}/api/users/${post.userId}`)
     return post;
 }
 
@@ -32,7 +33,7 @@ export async function createPost(formData: FormData) {
         content: formData.get("content") as string,
     }
 
-    const data = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/posts/`,
+    const data = await fetch(`${getBaseUrl()}/api/posts/`,
         {
             method: 'POST',
             headers: {

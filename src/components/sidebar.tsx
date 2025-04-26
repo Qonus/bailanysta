@@ -79,6 +79,14 @@ export default async function AppSidebar({ session }: { session: Session }) {
 					<DropdownMenuItem asChild>
 						<LogoutButton />
 					</DropdownMenuItem>
+					<DropdownMenuItem asChild>
+						<Button variant='ghost' className="nav-button pl-2" asChild>
+							<a href="/profile" className="flex">
+								<Icons.user className="size-7" />
+								<span className="hidden md:block">{t('profile')}</span>
+							</a>
+						</Button>
+					</DropdownMenuItem>
 				</DropdownMenuContent>
 			</DropdownMenu>
 		</div>
