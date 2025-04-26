@@ -24,7 +24,7 @@ export async function POST(request: Request) {
             headers: { 'Content-Type': 'application/json' }
         });
     }
-    catch (e) {
+    catch {
         return new Response();
     }
 }
