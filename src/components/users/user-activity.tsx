@@ -13,7 +13,7 @@ export default function UserActivity(
                 <Tabs.Trigger value="comments">Comments</Tabs.Trigger>
             </Tabs.List>
 
-            <Box pt="3">
+            <Box>
                 <Tabs.Content value="posts">
                     {posts.map((post) => (
                         <PostCard key={post.id} post={post} />

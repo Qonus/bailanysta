@@ -15,8 +15,8 @@ export default async function Home({ }) {
 
   return (
     <div>
-      <div className="main-block">
-        <div className="flex gap-3 items-center">
+      <div className="hover-block">
+        <div className="flex gap-3 items-center p-4">
           <Icons.profile size={50} />
           {session.user.name}
         </div>

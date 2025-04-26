@@ -124,7 +124,7 @@
 
 @layer utilities {
   .container {
-    max-width: 1200px;
+    max-width: 1000px;
     @apply m-auto
   }
 
@@ -137,7 +137,15 @@
     @apply rounded-full h-13 text-lg cursor-pointer w-fit
   }
 
-  .main-block {
-    @apply p-4 border-t-1 border-t-current/20 size-full transition-all duration-100 hover:bg-current/8
+  .block-border-b {
+    @apply border-b-1 border-b-current/20
+  }
+
+  .block-border-t {
+    @apply border-t-1 border-t-current/20
+  }
+
+  .hover-block {
+    @apply duration-100 hover:bg-current/8
   }
 }
