@@ -3,6 +3,12 @@
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 
+export async function getPosts() {
+    const data = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/posts/`);
+    const posts = await data.json();
+    return posts;
+}
+
 export async function getPost(id: string) {
     const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/posts/${id}`);
     const post = await response.json();

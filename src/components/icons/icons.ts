@@ -1,4 +1,4 @@
-import { Bell, Home, LogOut, Plus, Settings, User } from "lucide-react";
+import { ArrowLeft, Bell, Home, LogOut, Plus, Settings, User } from "lucide-react";
 import Bailanysta from "./bailanysta";
 import Google from "./google";
 import ProfileIcon from "./profile";
@@ -14,4 +14,5 @@ export const Icons = {
     settings: Settings,
     post: Plus,
     logout: LogOut,
+    back: ArrowLeft,
 } 

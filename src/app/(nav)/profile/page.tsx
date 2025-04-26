@@ -27,8 +27,7 @@ export default async function Profile() {
       <Tabs.Root defaultValue="posts">
         <Tabs.List>
           <Tabs.Trigger value="posts">Posts</Tabs.Trigger>
-          <Tabs.Trigger value="documents">Documents</Tabs.Trigger>
-          <Tabs.Trigger value="settings">Settings</Tabs.Trigger>
+          <Tabs.Trigger value="comments">Comments</Tabs.Trigger>
         </Tabs.List>
 
         <Box pt="3">
@@ -36,12 +35,8 @@ export default async function Profile() {
             <Text size="2">Test Post</Text>
           </Tabs.Content>
 
-          <Tabs.Content value="documents">
+          <Tabs.Content value="comments">
             <Text size="2">Access and update your documents.</Text>
-          </Tabs.Content>
-
-          <Tabs.Content value="settings">
-            <Text size="2">Edit your profile or update contact information.</Text>
           </Tabs.Content>
         </Box>
       </Tabs.Root>

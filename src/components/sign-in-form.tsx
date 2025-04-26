@@ -10,6 +10,7 @@ export default async function SignInForm() {
         <form
             action={async () => {
                 "use server";
+
                 await signIn("google");
             }}
         >

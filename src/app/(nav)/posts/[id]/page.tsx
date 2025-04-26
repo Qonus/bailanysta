@@ -1,3 +1,5 @@
+import TopBar from "@/components/top-bar";
+import { getTranslations } from "next-intl/server";
 import { getPost } from "../actions";
 
 export default async function PostPage({ params,
@@ -7,14 +9,17 @@ export default async function PostPage({ params,
     const { id } = await params;
     const post = await getPost(id);
     console.log(post);
-    return (
-        <div className="page flex justify-center">
-            <div className="">
-                <h2>POST ID: {post.id}</h2>
-                <h2>AUTHOR: {post.userId}</h2>
-                <h2>POST CONTENT: {post.content}</h2>
 
+    const t = await getTranslations();
+    return (
+        <>
+            <TopBar title={t("Sidebar.post")} />
+            <div className="page flex flex-col justify-center">
+                <div className="h-1000 p-4">
+                    <h2 className="text-xl">{post.content}</h2>
+
+                </div>
             </div>
-        </div>
+        </>
     );
 }

@@ -1,18 +1,22 @@
 import { db } from "@/lib/db";
 import { posts } from "@/lib/db/schema";
+import { desc } from "drizzle-orm";
+import { NextRequest } from "next/server";
 
-// export async function GET(request: NextRequest) {
-//     const searchParams = request.nextUrl.searchParams;
-//     const query = searchParams.get('query');
+export async function GET(_request: NextRequest) {
+    // const searchParams = _request.nextUrl.searchParams;
+    // const query = searchParams.get('query');
 
-//     await db.query.posts.findFirst({
-//     })
-
-//     return new Response(JSON.stringify(users), {
-//         status: 200,
-//         headers: { 'Content-Type': 'application/json' }
-//     });
-// }
+    const data = await db.query.posts.findMany(
+        {
+            orderBy: [desc(posts.created_at)],
+        }
+    );
+    return new Response(JSON.stringify(data), {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' }
+    });
+}
 
 export async function POST(request: Request) {
     try {
