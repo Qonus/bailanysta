@@ -9,6 +9,12 @@ export async function getPosts() {
     return posts;
 }
 
+export async function getUserPosts(userId: string) {
+    const data = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/posts?userid=${userId}`);
+    const posts = await data.json();
+    return posts;
+}
+
 export async function getPost(id: string) {
     const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/posts/${id}`);
     const post = await response.json();

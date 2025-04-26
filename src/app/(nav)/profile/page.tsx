@@ -1,11 +1,17 @@
 import EditProfileButton from "@/components/edit-profile";
 import { Icons } from "@/components/icons/icons";
+import UserActivity from "@/components/users/user-activity";
 import { auth } from "@/lib/auth";
-import { Box, Tabs, Text } from "@radix-ui/themes";
+import { redirect } from "next/navigation";
+import { getUserPosts } from "../posts/actions";
 
 export default async function Profile() {
   const session = await auth();
   // const t = await getTranslations('Profile');
+  if (!session) redirect('sign-in');
+
+  const posts = await getUserPosts(session.user.id);
+
   return (
     <div className="h-screen px-4 pt-20 max-w-160 m-auto">
 
@@ -24,22 +30,7 @@ export default async function Profile() {
         </div>
       </div>
 
-      <Tabs.Root defaultValue="posts">
-        <Tabs.List>
-          <Tabs.Trigger value="posts">Posts</Tabs.Trigger>
-          <Tabs.Trigger value="comments">Comments</Tabs.Trigger>
-        </Tabs.List>
-
-        <Box pt="3">
-          <Tabs.Content value="posts">
-            <Text size="2">Test Post</Text>
-          </Tabs.Content>
-
-          <Tabs.Content value="comments">
-            <Text size="2">Access and update your documents.</Text>
-          </Tabs.Content>
-        </Box>
-      </Tabs.Root>
+      <UserActivity posts={posts} />
 
     </div>
   );
