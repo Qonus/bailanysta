@@ -1,10 +1,8 @@
 import { db } from "@/lib/db";
 import { posts } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
-import { NextRequest } from "next/server";
 
 export async function GET(
-    request: NextRequest,
     { params }: { params: Promise<{ id: string }> },
 ) {
     const id = (await params).id;
@@ -17,11 +15,11 @@ export async function GET(
     });
 }
 
-export async function DELETE(
-    request: NextRequest,
-    { params }: { params: Promise<{ id: string }> },
-) {
-    const id = (await params).id;
-    // e.g. Delete user with ID `id` in DB
-    return new Response(null, { status: 204 });
-}
+// export async function DELETE(
+//     request: NextRequest,
+//     { params }: { params: Promise<{ id: string }> },
+// ) {
+//     const id = (await params).id;
+//     // e.g. Delete user with ID `id` in DB
+//     return new Response(null, { status: 204 });
+// }
