@@ -4,7 +4,7 @@ import { eq } from "drizzle-orm";
 import { NextRequest } from "next/server";
 
 export async function GET(
-    _request: NextRequest,
+    request: NextRequest,  // eslint-disable-line @typescript-eslint/no-unused-vars
     { params }: { params: Promise<{ id: string }> },
 ) {
     const id = (await params).id;

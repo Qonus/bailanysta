@@ -18,7 +18,7 @@ export default async function RootLayout({
 			<div className="w-fit">
 				<AppSidebar session={session} />
 			</div>
-			<div className="overflow-y-auto w-full">
+			<div className="overflow-y-auto w-full border-r-1 border-r-current/20">
 				{children}
 			</div>
 		</div>
