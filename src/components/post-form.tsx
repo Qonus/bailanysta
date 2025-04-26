@@ -16,6 +16,9 @@ export default function PostForm({ className }: React.ComponentProps<"form">) {
                 className="w-fit"
                 onClick={(e) => {
                     e.preventDefault();
+
+
+
                     toast.success(
                         "Posted Successfully!", {
                         description: "Your Post",

@@ -1,5 +1,5 @@
 import { ThemeProvider } from "@/components/theme-provider";
-import { Theme, ThemePanel } from "@radix-ui/themes";
+import { Theme } from "@radix-ui/themes";
 import "@radix-ui/themes/styles.css";
 import type { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
@@ -41,7 +41,6 @@ export default async function RootLayout({
               <Toaster theme="light" />
             </NextIntlClientProvider>
           </ThemeProvider>
-          <ThemePanel />
         </Theme>
       </body>
     </html>
