@@ -9,13 +9,13 @@ export default async function Settings() {
     <div className="flex flex-col">
       <TopBar title={t("title")} />
       <div className="w-full h-fit">
-        <div className="flex gap-3 p-10 block-border-b hover-block">
+        <div className="flex gap-3 p-10 block-border-b hover-block items-center">
           <p className="text-lg">
             {t("locale")}
           </p>
           <LocaleSwitcher />
         </div>
-        <div className="flex gap-3 p-10 block-border-b hover-block">
+        <div className="flex gap-3 p-10 block-border-b hover-block items-center">
           <p className="text-lg">
             {t("theme")}
           </p>
