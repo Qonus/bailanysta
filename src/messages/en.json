@@ -39,7 +39,8 @@
     },
     "Settings": {
         "title": "Settings",
-        "locale": "Language"
+        "locale": "Language",
+        "theme": "Theme"
     },
     "Notifications": {
         "title": "Notifications"

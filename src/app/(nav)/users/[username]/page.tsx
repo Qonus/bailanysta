@@ -1,10 +1,11 @@
 import { Icons } from "@/components/icons/icons";
+import LogoutButton from "@/components/logout-button";
 import TopBar from "@/components/top-bar";
 import EditProfileButton from "@/components/users/edit-profile";
 import UserActivity from "@/components/users/user-activity";
 import Username from "@/components/users/username";
 import { auth } from "@/lib/auth";
-import { redirect } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { getUserPosts } from "../../posts/actions";
 import { getUserByID, getUserByUsername, getUserLikes } from "../actions";
 
@@ -23,6 +24,7 @@ export default async function Profile(
     const isCurrentUser = currentUser?.username == username;
 
     const user = await getUserByUsername(username);
+    if (!user) notFound();
     const userLikes = await getUserLikes(session.user.id);
 
     const posts = await getUserPosts(user?.id || "");
@@ -43,7 +45,10 @@ export default async function Profile(
                             <Username username={user?.username || undefined} className="text-xl" />
                         </div>
                         {isCurrentUser ?
-                            <EditProfileButton user={user} /> :
+                            <div className="flex justify-between items-center gap-5">
+                                <EditProfileButton user={user} />
+                                <LogoutButton />
+                            </div> :
                             <></>
                         }
                     </div>

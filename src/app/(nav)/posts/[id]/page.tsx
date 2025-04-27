@@ -17,9 +17,7 @@ export default async function PostPage(
     const { id } = await params;
     const post = await getPost(id);
 
-    if (!post) {
-        notFound();
-    }
+    if (!post) notFound();
 
     const session = await auth();
     if (!session) redirect("/sign-in");

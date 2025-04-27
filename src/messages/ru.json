@@ -39,7 +39,8 @@
     },
     "Settings": {
         "title": "Настройки",
-        "locale": "Язык"
+        "locale": "Язык",
+        "theme": "Режим"
     },
     "Notifications": {
         "title": "Уведомления"

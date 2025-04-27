@@ -1,5 +1,6 @@
 import { IUser } from "@/types/tables";
 import { getTranslations } from "next-intl/server";
+import Link from "next/link";
 import { Icons } from "./icons/icons";
 import LogoutButton from "./logout-button";
 import PostButton from "./post-button";
@@ -46,10 +47,10 @@ export default async function AppSidebar({ user }: { user?: IUser }) {
 						<Tooltip key={item.title} delayDuration={0}>
 							<TooltipTrigger asChild>
 								<Button variant='ghost' className="nav-button pl-2" asChild>
-									<a href={item.url} className="flex">
+									<Link href={item.url} className="flex">
 										{item.icon && <item.icon className="size-7" />}
 										<span className="hidden md:block">{t(item.title)}</span>
-									</a>
+									</Link>
 								</Button>
 							</TooltipTrigger>
 							<TooltipContent
@@ -75,10 +76,7 @@ export default async function AppSidebar({ user }: { user?: IUser }) {
 						</div>
 					</Button>
 				</DropdownMenuTrigger>
-				<DropdownMenuContent side="right">
-					<DropdownMenuItem asChild>
-						<LogoutButton />
-					</DropdownMenuItem>
+				<DropdownMenuContent className="flex items-center gap-5" side="right">
 					<DropdownMenuItem asChild>
 						<Button variant='ghost' className="nav-button pl-2" asChild>
 							<a href={`/users/${user?.username}`} className="flex">
@@ -86,6 +84,9 @@ export default async function AppSidebar({ user }: { user?: IUser }) {
 								<span className="hidden md:block">{t('profile')}</span>
 							</a>
 						</Button>
+					</DropdownMenuItem>
+					<DropdownMenuItem className="rounded-full" asChild>
+						<LogoutButton />
 					</DropdownMenuItem>
 				</DropdownMenuContent>
 			</DropdownMenu>

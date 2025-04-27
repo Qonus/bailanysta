@@ -4,15 +4,15 @@ import { Button } from "./ui/button";
 
 export default function LogoutButton() {
     return (
-        <Button variant="ghost" className="nav-button" onClick={async () => {
+        <Button variant="destructive" className="rounded-full" onClick={async () => {
             "use server";
             await signOut();
         }
         }>
-            <Icons.logout className="size-7" />
-            <span >
+            <Icons.logout className="size-5" />
+            {/* <span >
                 Logout
-            </span>
+            </span> */}
         </Button>
     );
 }

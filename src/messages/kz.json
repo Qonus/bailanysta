@@ -39,7 +39,8 @@
     },
     "Settings": {
         "title": "Параметрлер",
-        "locale": "Тіл"
+        "locale": "Тіл",
+        "theme": "Түс"
     },
     "Notifications": {
         "title": "Хабарламалар"
