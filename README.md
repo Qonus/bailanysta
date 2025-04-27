@@ -1,3 +1,5 @@
+<img src="https://github.com/user-attachments/assets/a8db1b47-d3dd-4127-880d-4933e708166e" width="150" height="150" />
+
 # Bailanysta
 Bailanysta is a social network for everyone.
 
@@ -8,10 +10,13 @@ This is a [Next.js](https://nextjs.org) project made for nFactorial Incubator 20
 - Login with Google
 - Language and Theme switcher
 - You can leave a like on posts
+- Responsive, twitter-like design
+- Custom API
+- Deployment
 
 ## Getting Started
 1. Clone the repository
-2. Setup environmental variables, you can find the .env example file [github.com/Qonus/bailanysta/.example-env](here)
+2. Setup environmental variables, you can find the `.env` example file [here](https://github.com/Qonus/bailanysta/blob/master/.example-env)
 3. Run the development server:
 
 ```bash
