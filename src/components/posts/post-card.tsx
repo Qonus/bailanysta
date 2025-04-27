@@ -1,7 +1,8 @@
 "use client";
 
-import { cn } from "@/lib/utils";
+import { cn, formatRelativeTime } from "@/lib/utils";
 import { IPost } from "@/types/tables";
+import { useLocale } from "next-intl";
 import { useRouter } from "next/navigation";
 import { Icons } from "../icons/icons";
 import Username from "../users/username";
@@ -11,6 +12,7 @@ export default function PostCard(
     { className, post, initialIsLiked }: { className?: string, post: IPost, initialIsLiked: boolean }
 ) {
     const router = useRouter();
+    const locale = useLocale()
 
     return (
         <div className={cn("w-full h-fit hover-block", className)}>
@@ -20,6 +22,7 @@ export default function PostCard(
                     <div className="flex items-center gap-1 text-md">
                         <p className="">{post.user?.name}</p>
                         <Username username={post.user?.username || undefined} />
+                        <p>{formatRelativeTime(post.created_at, locale)}</p>
                     </div>
                     <h2 className="text-lg">{post.content}</h2>
                 </div>

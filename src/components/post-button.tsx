@@ -27,7 +27,7 @@ export default function PostButton() {
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
-                    <DialogTitle>{t("Post.title")}</DialogTitle>
+                    <DialogTitle>{t("PostForm.title")}</DialogTitle>
                 </DialogHeader>
                 <PostForm />
             </DialogContent>

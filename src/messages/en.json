@@ -13,6 +13,13 @@
         "regex": "Username can only contain letters, numbers, and underscores",
         "manual": "Username is already taken"
     },
+    "PostForm": {
+        "title": "What's new?",
+        "placeholder": "Type here...",
+        "min": "Content is required",
+        "max": "You have only 255 characters",
+        "post": "Post"
+    },
     "Sidebar": {
         "home": "Home",
         "notifications": "Notifications",
@@ -30,13 +37,21 @@
         "username": "Username",
         "save": "Save Changes"
     },
-    "Settings": {},
-    "Post": {
-        "title": "What's new?",
-        "placeholder": "Type here..."
+    "Settings": {
+        "title": "Settings",
+        "locale": "Language"
+    },
+    "Notifications": {
+        "title": "Notifications"
     },
     "NotFound": {
         "title": "404 - Page Not Found",
         "description": "The page you're looking for does not exist."
+    },
+    "LocaleSwitcher": {
+        "ru": "Русский",
+        "en": "English",
+        "kz": "Қазақша",
+        "label": "Language"
     }
 }

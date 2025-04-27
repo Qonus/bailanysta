@@ -31,10 +31,10 @@ export default function PostForm() {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-end gap-5">
-            <div>
+            <div className="w-full">
                 <Textarea
                     {...register("content")}
-                    placeholder={t("Post.placeholder")}
+                    placeholder={t("placeholder")}
                     rows={3}
                     className="resize-none" />
                 {errors.content &&
@@ -48,7 +48,7 @@ export default function PostForm() {
                 className="nav-button"
             >
                 <p className="text-lg">
-                    {t("Sidebar.post")}
+                    {t("post")}
                 </p>
             </Button>
         </form>
