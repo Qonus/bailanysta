@@ -5,7 +5,7 @@ export const posts = pgTable("posts", {
     id: text("id").primaryKey().$defaultFn(() => crypto.randomUUID()),
     userId: text("userId").notNull().references(() => users.id, { onDelete: "cascade" }),
     content: varchar({ length: 255 }).notNull(),
-    created_at: timestamp({ mode: "date" }).defaultNow(),
+    created_at: timestamp({ mode: "date" }).defaultNow().notNull(),
 });
 
 export const users = pgTable("user", {
