@@ -6,7 +6,7 @@ export default function HomeLoading() {
         <div>
             <div className="hover-block">
                 <div className="flex gap-3 items-center p-4">
-                    <Skeleton className="w-[50px] h-[50px] rounded-full" />
+                    <Skeleton className="w-[55px] h-[55px] rounded-full" />
                     <div className="flex gap-1 items-center">
                         <Skeleton className="w-[60px] h-[25px]" />
                         <Skeleton className="w-[50px] h-[25px]" />
@@ -16,7 +16,7 @@ export default function HomeLoading() {
             {Array.from({ length: 7 }, (_, index) => (
                 <div key={index} className="w-full h-fit hover-block">
                     <div className="cursor-pointer block-border-t p-4 flex">
-                        <Skeleton className="w-[40px] h-[40px] rounded-full" />
+                        <Skeleton className="w-[45px] h-[45px] rounded-full" />
                         <div className="px-2 flex flex-col gap-2 w-full">
                             <div className="flex items-center gap-1 text-md">
                                 <Skeleton className="w-[60px] h-[25px]" />
