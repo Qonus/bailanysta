@@ -1,14 +1,19 @@
+import EditProfileButton from "@/components/edit-profile";
+import { Icons } from "@/components/icons/icons";
+import TopBar from "@/components/top-bar";
+import { auth } from "@/lib/auth";
+import { redirect } from "next/navigation";
 
 export default async function Profile() {
-  // const session = await auth();
-  // // const t = await getTranslations('Profile');
-  // if (!session) redirect('sign-in');
+  const session = await auth();
+  // const t = await getTranslations('Profile');
+  if (!session) redirect('sign-in');
 
   // const posts = await getUserPosts(session.user.id);
 
   return (
     <>
-      {/* <TopBar title="Profile" />
+      <TopBar title="Profile" />
       <div className="pt-10 m-auto">
 
         <div className="block-border-b p-6 flex flex-col gap-5">
@@ -26,9 +31,9 @@ export default async function Profile() {
           </div>
         </div>
 
-        <UserActivity posts={posts} />
+        {/* <UserActivity posts={posts} /> */}
 
-      </div> */}
+      </div>
     </>
   );
 }
