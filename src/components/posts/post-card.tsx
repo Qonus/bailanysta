@@ -13,8 +13,8 @@ export default function PostCard(
     const router = useRouter();
 
     return (
-        <div className={cn("w-full h-fit z-1", className)}>
-            <div onClick={() => { router.push(`/posts/${post.id}`) }} className="cursor-pointer hover-block block-border-t p-4 flex">
+        <div className={cn("w-full h-fit hover-block", className)}>
+            <div onClick={() => { router.push(`/posts/${post.id}`) }} className="cursor-pointer block-border-t p-4 flex">
                 <Icons.profile user={post.user || undefined} size={40} />
                 <div className="px-2 flex flex-col gap-2">
                     <div className="flex items-center gap-1 text-md">
@@ -24,7 +24,7 @@ export default function PostCard(
                     <h2 className="text-lg">{post.content}</h2>
                 </div>
             </div>
-            <div className="flex gap-3">
+            <div className="flex gap-3 px-5 py-2">
                 <PostLike initialIsLiked={initialIsLiked} post={post} />
             </div>
         </div>
