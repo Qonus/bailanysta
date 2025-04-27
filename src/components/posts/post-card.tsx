@@ -24,7 +24,7 @@ export default function PostCard(
                         <Username username={post.user?.username || undefined} />
                         <p>{formatRelativeTime(post.created_at, locale)}</p>
                     </div>
-                    <h2 className="text-lg">{post.content}</h2>
+                    <h2 className="text-lg whitespace-pre-line">{post.content}</h2>
                 </div>
             </div>
             <div className="flex gap-3 px-5 py-2">
