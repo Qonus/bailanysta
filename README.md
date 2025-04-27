@@ -58,18 +58,18 @@ Bailanysta is a minimalist social platform where users can share thoughts, inter
 - **Progressive enhancement** - core features first, extras later
 
 ### Technical Decisions
-| Choice | Reasoning | Trade-off |
-|--------|-----------|-----------|
-| Next.js | Fast fullstack development | Less flexible than pure React |
-| Drizzle+Neon | Type-safe SQL with serverless DB | Learning curve for Drizzle |
-| Auth.js | Simplified auth flows | Limited customization |
+| Choice | Reasoning |
+|--------|-----------|
+| Next.js | Fast fullstack development |
+| Drizzle+Neon | Type-safe SQL with serverless DB |
+| Auth.js | Simplified auth flows |
 
 ### Pending Improvements
 - [ ] Image upload functionality
 - [ ] Post editing/deletion
 - [ ] Comment and repost features
 - [ ] Notification system
-- [ ] User profiles with bios
+- [ ] User profile interactions: follow/unfollow
 
 ## 🧰 Tech Stack
 
@@ -91,14 +91,14 @@ Bailanysta is a minimalist social platform where users can share thoughts, inter
 1. **Next.js** - Ideal for rapid prototyping with built-in routing and API routes
 2. **Drizzle** - Type-safe database interactions match our TS focus
 3. **NeonDB** - Free tier perfect for early-stage projects
-4. **Vercel** - Seamless integration with Next.js projects
+4. **Vercel** - Seamless integration with Next.js, Github projects
 
 ## ⚠️ Known Issues
 1. **Media Limitations**  
    - Cannot upload images (planned via Next.js Image Optimization)
 2. **Content Management**  
    - Posts are permanent (no edit/delete)
-3. **Social Features**  
+3. **Social Features**
    - No commenting/threading system
-4. **Notifications**  
+4. **Notifications**
    - Interaction alerts not implemented
