@@ -5,6 +5,7 @@ import EditProfileButton from "@/components/users/edit-profile";
 import UserActivity from "@/components/users/user-activity";
 import Username from "@/components/users/username";
 import { auth } from "@/lib/auth";
+import { getTranslations } from "next-intl/server";
 import { notFound, redirect } from "next/navigation";
 import { getUserPosts } from "../../posts/actions";
 import { getUserByID, getUserByUsername, getUserLikes } from "../actions";
@@ -29,10 +30,10 @@ export default async function Profile(
 
     const posts = await getUserPosts(user?.id || "");
 
-    // const t = await getTranslations('Profile');
+    const t = await getTranslations();
     return (
         <>
-            <TopBar title="Profile" />
+            <TopBar title={t("Sidebar.profile")} />
             <div className="pt-10 m-auto">
                 <div className="block-border-b p-6 flex flex-col gap-5">
                     <Icons.profile user={user || undefined} size={100} />
