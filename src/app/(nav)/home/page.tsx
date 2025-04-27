@@ -10,7 +10,7 @@ export default async function Home({ }) {
 
   const session = await auth();
   if (!session || !session.user) redirect('/sign-in');
-
+  console.error(posts);
   // const t = await getTranslations('HomePage');
 
   return (

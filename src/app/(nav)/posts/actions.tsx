@@ -3,6 +3,11 @@ import { getBaseUrl } from "@/lib/utils";
 import axios from "axios";
 import { redirect } from "next/navigation";
 
+export async function getUser(id: string) {
+    const { data } = await axios.get(`${getBaseUrl()}/api/users/${id}`);
+    return data;
+}
+
 export async function getPosts() {
     const { data } = await axios.get(`${getBaseUrl()}/api/posts/`);
     return data;
