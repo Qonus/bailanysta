@@ -15,7 +15,7 @@ export default async function SignIn() {
     return (
         <div className="container flex h-screen">
             <div className="m-auto flex flex-col align-middle gap-10 p-5 max-w-150">
-                <div>
+                <div className="align-middle">
                     <div className="w-full py-10">
                         <Icons.logo className="m-auto size-30" />
 
