@@ -26,7 +26,7 @@ export default function BottomBar({ user }: { user?: IUser }) {
         ],
     }
     return (
-        <div className="z-5 block-border-t size-full flex items-center px-6 justify-around gap-5 backdrop-blur-lg">
+        <div className="z-5 block-border-t size-full flex items-center px-3 justify-around backdrop-blur-lg">
             {data.nav.slice(0, 2).map((item) => (
                 <Button key={item.url} variant="ghost" className="nav-button" asChild>
                     <Link href={item.url}>

@@ -1,6 +1,6 @@
 import { db } from "@/lib/db";
-import { posts } from "@/lib/db/schema";
-import { eq } from "drizzle-orm";
+import { likes, posts, users } from "@/lib/db/schema";
+import { count, eq } from "drizzle-orm";
 import { NextRequest } from "next/server";
 
 export async function GET(
@@ -8,9 +8,27 @@ export async function GET(
     { params }: { params: Promise<{ id: string }> },
 ) {
     const id = (await params).id;
-    const post = await db.query.posts.findFirst({
-        where: eq(posts.id, id)
-    });
+    const data = await db
+        .select({
+            post: posts,
+            user: users,
+            likesCount: count(likes.id)
+        })
+        .from(posts)
+        .leftJoin(users, eq(posts.userId, users.id))
+        .leftJoin(likes, eq(posts.id, likes.postId))
+        .where(eq(posts.id, id))
+        .groupBy(posts.id, users.id)
+        .execute();
+
+    const result = data[0];
+
+    const post = {
+        ...result.post,
+        user: result.user,
+        likes: Number(result.likesCount),
+    };
+
     return new Response(JSON.stringify(post), {
         status: 200,
         headers: { 'Content-Type': 'application/json' },
