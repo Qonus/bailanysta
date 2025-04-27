@@ -1,4 +1,4 @@
-import { Session } from "next-auth";
+import { IUser } from "@/types/tables";
 import { getTranslations } from "next-intl/server";
 import { Icons } from "./icons/icons";
 import LogoutButton from "./logout-button";
@@ -9,33 +9,33 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./ui/tooltip";
 
 
-const data = {
+export default async function AppSidebar({ user }: { user?: IUser }) {
+	const data = {
 
-	nav: [
-		{
-			icon: Icons.home,
-			title: "home",
-			url: "/home",
-		},
-		{
-			icon: Icons.notifications,
-			title: "notifications",
-			url: "/notifications",
-		},
-		{
-			icon: Icons.user,
-			title: "profile",
-			url: "/profile",
-		},
-		{
-			icon: Icons.settings,
-			title: "settings",
-			url: "/settings",
-		},
-	],
-}
+		nav: [
+			{
+				icon: Icons.home,
+				title: "home",
+				url: "/home",
+			},
+			{
+				icon: Icons.notifications,
+				title: "notifications",
+				url: "/notifications",
+			},
+			{
+				icon: Icons.user,
+				title: "profile",
+				url: `/users/${user?.username}`,
+			},
+			{
+				icon: Icons.settings,
+				title: "settings",
+				url: "/settings",
+			},
+		],
+	}
 
-export default async function AppSidebar({ session }: { session: Session }) {
 	const t = await getTranslations("Sidebar");
 	return (
 		<div className="size-full flex flex-col justify-between border-r-1 border-r-current/10 px-4 md:px-5 py-5">
@@ -67,11 +67,11 @@ export default async function AppSidebar({ session }: { session: Session }) {
 			</div>
 			<DropdownMenu>
 				<DropdownMenuTrigger asChild>
-					<Button variant='ghost' className="rounded-full h-15 p-2">
-						<Icons.profile />
+					<Button variant='ghost' className="rounded-full h-15 p-2 justify-start">
+						<Icons.profile image={user?.image || undefined} />
 						<div className="hidden md:flex flex-col text-left">
-							<p>{session?.user?.name || "Username"}</p>
-							<p className="text-sm">{session?.user?.email || "email@example.com"}</p>
+							<p>{user?.name || "Name"}</p>
+							<p className="text-sm">{`@${user?.username}` || "@username"}</p>
 						</div>
 					</Button>
 				</DropdownMenuTrigger>
@@ -81,7 +81,7 @@ export default async function AppSidebar({ session }: { session: Session }) {
 					</DropdownMenuItem>
 					<DropdownMenuItem asChild>
 						<Button variant='ghost' className="nav-button pl-2" asChild>
-							<a href="/profile" className="flex">
+							<a href={`/users/${user?.username}`} className="flex">
 								<Icons.user className="size-7" />
 								<span className="hidden md:block">{t('profile')}</span>
 							</a>

@@ -6,38 +6,58 @@ import { posts, users } from "@/lib/db/schema";
 import { desc, eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
 
-export async function getUser(id: string) {
-    // const { data } = await axios.get(`${getBaseUrl()}/api/users/${id}`);
-    const user = await db.query.users.findFirst({
-        where: eq(users.id, id)
-    });
-    return user;
-}
-
 export async function getPosts() {
     // const { data } = await axios.get(`${getBaseUrl()}/api/posts/`);
-    const data = await db.query.posts.findMany({
-        orderBy: [desc(posts.created_at)],
-    });
-    return data;
+
+    const data = await db
+        .select()
+        .from(posts)
+        .leftJoin(users, eq(posts.userId, users.id))
+        .orderBy(desc(posts.created_at))
+        .execute();
+
+    return data.map((item) => ({
+        ...item.posts,
+        user: item.user,
+    }));
 }
 
 export async function getUserPosts(userId: string) {
     // const { data } = await axios.get(`${getBaseUrl()}/api/posts?userid=${userId}`);
-    const data = await db.query.posts.findMany({
-        orderBy: [desc(posts.created_at)],
-        where: eq(posts.userId, userId as string),
-    });
-    return data;
+
+    const data = await db
+        .select()
+        .from(posts)
+        .leftJoin(users, eq(posts.userId, users.id))
+        .where(eq(posts.userId, userId))
+        .orderBy(desc(posts.created_at))
+        .execute();
+
+    return data.map((item) => ({
+        ...item.posts,
+        user: item.user,
+    }));
 }
 
 export async function getPost(id: string) {
     // const { data } = await axios.get(`${getBaseUrl()}/api/posts/${id}`);
     // const user_response = await fetch(`${getBaseUrl()}/api/users/${post.userId}`, { cache: "no-store" })
-    const post = await db.query.posts.findFirst({
-        where: eq(posts.id, id)
-    });
-    return post;
+
+    // const post = await db.query.posts.findFirst({
+    //     where: eq(posts.id, id)
+    // });
+
+    const post = await db
+        .select()
+        .from(posts)
+        .leftJoin(users, eq(posts.userId, users.id))
+        .where(eq(posts.id, id))
+        .execute();
+
+    return {
+        ...post[0].posts,
+        user: post[0].user,
+    };
 }
 
 export async function createPost(formData: FormData) {

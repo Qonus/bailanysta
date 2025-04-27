@@ -4,6 +4,11 @@
         "call-to-action": "First, you will need to sign into your account",
         "continue-with": "Continue with"
     },
+    "UsernameDialog": {
+        "title": "Set your username",
+        "placeholder": "username_example",
+        "save": "Save"
+    },
     "Sidebar": {
         "home": "Home",
         "notifications": "Notifications",
@@ -25,7 +30,7 @@
         "placeholder": "Type here..."
     },
     "NotFound": {
-        "title": "404 - Post Not Found",
+        "title": "404 - Page Not Found",
         "description": "The page you're looking for does not exist."
     }
 }

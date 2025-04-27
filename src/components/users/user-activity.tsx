@@ -1,10 +1,10 @@
-import { IPost } from "@/types/tables";
+import { IPostUser } from "@/types/tables";
 import { Box, Tabs, Text } from "@radix-ui/themes";
 import PostCard from "../posts/post-card";
 
 export default function UserActivity(
     { posts }:
-        { posts: IPost[] }
+        { posts: IPostUser[] }
 ) {
     return (
         <Tabs.Root defaultValue="posts">

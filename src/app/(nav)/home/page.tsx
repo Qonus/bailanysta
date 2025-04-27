@@ -1,7 +1,7 @@
 import { Icons } from "@/components/icons/icons";
 import PostCard from "@/components/posts/post-card";
 import { auth } from "@/lib/auth";
-import { IPost } from "@/types/tables";
+import { IPostUser } from "@/types/tables";
 import { redirect } from "next/navigation";
 import { getPosts } from "../posts/actions";
 
@@ -17,12 +17,12 @@ export default async function Home({ }) {
     <div>
       <div className="hover-block">
         <div className="flex gap-3 items-center p-4">
-          <Icons.profile size={50} />
+          <Icons.profile image={session.user.image || undefined} size={50} />
           {session.user.name}
         </div>
 
       </div>
-      {posts.map((post: IPost) => (
+      {posts.map((post: IPostUser) => (
         <PostCard key={post.id} post={post} />
       ))}
     </div>

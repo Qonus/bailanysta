@@ -1,14 +1,15 @@
-import { auth } from "@/lib/auth";
 import { cn } from "@/lib/utils";
-import { LucideProps } from "lucide-react";
 import Image from "next/image";
 
-export default async function ProfileIcon({
+export default function ProfileIcon({
+    image,
     className,
     size = 40,
-    // ...props
-}: LucideProps) {
-    const session = await auth();
+}: {
+    image?: string
+    className?: string,
+    size?: number,
+}) {
 
     return (
         <div
@@ -17,7 +18,7 @@ export default async function ProfileIcon({
         // {...props}
         >
             <Image
-                src={session?.user?.image || "/default-profile-picture.png"}
+                src={image || "/default-profile-picture.png"}
                 width={400}
                 height={400}
                 alt="Profile picture"
