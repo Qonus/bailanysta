@@ -1,4 +1,4 @@
-import { boolean, integer, pgTable, primaryKey, text, timestamp, varchar } from "drizzle-orm/pg-core";
+import { boolean, integer, pgTable, primaryKey, text, timestamp, unique, varchar } from "drizzle-orm/pg-core";
 import type { AdapterAccountType } from "next-auth/adapters";
 
 export const posts = pgTable("posts", {
@@ -7,6 +7,16 @@ export const posts = pgTable("posts", {
     content: varchar({ length: 255 }).notNull(),
     created_at: timestamp({ mode: "date" }).defaultNow().notNull(),
 });
+
+export const likes = pgTable("likes", {
+    id: text("id").primaryKey().$defaultFn(() => crypto.randomUUID()),
+    postId: text("postId").notNull().references(() => posts.id, { onDelete: "cascade" }),
+    userId: text("userId").notNull().references(() => users.id, { onDelete: "cascade" }),
+},
+    (table) => ({
+        uniqueUserPost: unique().on(table.userId, table.postId),
+    })
+);
 
 export const users = pgTable("user", {
     id: text("id")

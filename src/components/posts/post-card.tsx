@@ -1,21 +1,22 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { IPostUser } from "@/types/tables";
-import Link from "next/link";
+import { IPost } from "@/types/tables";
+import { useRouter } from "next/navigation";
 import { Icons } from "../icons/icons";
 import Username from "../users/username";
+import PostLike from "./post-like";
 
 export default function PostCard(
-    { className, post }: { className?: string, post: IPostUser }
+    { className, post, initialIsLiked }: { className?: string, post: IPost, initialIsLiked: boolean }
 ) {
+    const router = useRouter();
+
     return (
-        <Link href={`/posts/${post.id}`} className={cn("w-full h-fit", className)}>
-            <div className="hover-block block-border-t p-4 flex">
-                <div>
-                    <Icons.profile user={post.user || undefined} size={40} />
-                </div>
-                <div className="px-2 flex flex-col gap-1">
+        <div className={cn("w-full h-fit z-1", className)}>
+            <div onClick={() => { router.push(`/posts/${post.id}`) }} className="cursor-pointer hover-block block-border-t p-4 flex">
+                <Icons.profile user={post.user || undefined} size={40} />
+                <div className="px-2 flex flex-col gap-2">
                     <div className="flex items-center gap-1 text-md">
                         <p className="">{post.user?.name}</p>
                         <Username username={post.user?.username || undefined} />
@@ -23,6 +24,9 @@ export default function PostCard(
                     <h2 className="text-lg">{post.content}</h2>
                 </div>
             </div>
-        </Link>
+            <div className="flex gap-3">
+                <PostLike initialIsLiked={initialIsLiked} post={post} />
+            </div>
+        </div>
     );
 }

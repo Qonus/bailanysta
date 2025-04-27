@@ -2,23 +2,73 @@
 
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
-import { posts, users } from "@/lib/db/schema";
-import { desc, eq } from "drizzle-orm";
+import { likes, posts, users } from "@/lib/db/schema";
+import { and, count, desc, eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
+
+// export async function getLike(userId: string, postId: string) {
+//     const data = await db.query.likes.whe
+// }
+
+export async function getLike(userId: string, postId: string) {
+    const result = await db
+        .select()
+        .from(likes)
+        .where(
+            and(eq(likes.userId, userId), eq(likes.postId, postId))
+        )
+        .limit(1)
+        .execute();
+
+    return result.length > 0 ? result[0] : null;
+}
+
+export async function likePost(id: string) {
+    const session = await auth();
+    if (!session) return;
+
+    const like = {
+        userId: session.user.id,
+        postId: id,
+    };
+
+    await db.insert(likes).values(like).returning();
+}
+
+export async function unlikePost(id: string) {
+    const session = await auth();
+    if (!session) return;
+
+    const like = {
+        userId: session.user.id,
+        postId: id,
+    };
+
+    await db
+        .delete(likes)
+        .where(and(eq(likes.userId, like.userId), eq(likes.postId, like.postId)));
+}
 
 export async function getPosts() {
     // const { data } = await axios.get(`${getBaseUrl()}/api/posts/`);
 
     const data = await db
-        .select()
+        .select({
+            post: posts,
+            user: users,
+            likesCount: count(likes.id)
+        })
         .from(posts)
         .leftJoin(users, eq(posts.userId, users.id))
+        .leftJoin(likes, eq(posts.id, likes.postId))
+        .groupBy(posts.id, users.id)
         .orderBy(desc(posts.created_at))
         .execute();
 
     return data.map((item) => ({
-        ...item.posts,
+        ...item.post,
         user: item.user,
+        likes: Number(item.likesCount),
     }));
 }
 
@@ -26,16 +76,23 @@ export async function getUserPosts(userId: string) {
     // const { data } = await axios.get(`${getBaseUrl()}/api/posts?userid=${userId}`);
 
     const data = await db
-        .select()
+        .select({
+            post: posts,
+            user: users,
+            likesCount: count(likes.id)
+        })
         .from(posts)
         .leftJoin(users, eq(posts.userId, users.id))
+        .leftJoin(likes, eq(posts.id, likes.postId))
         .where(eq(posts.userId, userId))
+        .groupBy(posts.id, users.id)
         .orderBy(desc(posts.created_at))
         .execute();
 
     return data.map((item) => ({
-        ...item.posts,
+        ...item.post,
         user: item.user,
+        likes: Number(item.likesCount),
     }));
 }
 
@@ -47,26 +104,35 @@ export async function getPost(id: string) {
     //     where: eq(posts.id, id)
     // });
 
-    const post = await db
-        .select()
+    const data = await db
+        .select({
+            post: posts,
+            user: users,
+            likesCount: count(likes.id)
+        })
         .from(posts)
         .leftJoin(users, eq(posts.userId, users.id))
+        .leftJoin(likes, eq(posts.id, likes.postId))
         .where(eq(posts.id, id))
+        .groupBy(posts.id, users.id)
         .execute();
 
+    const post = data[0];
+
     return {
-        ...post[0].posts,
-        user: post[0].user,
+        ...post.post,
+        user: post.user,
+        likes: Number(post.likesCount),
     };
 }
 
-export async function createPost(formData: FormData) {
+export async function createPost(content: string) {
     const session = await auth();
     if (!session) return;
 
     const post = {
         userId: session.user.id,
-        content: formData.get("content") as string,
+        content: content,
     };
 
     const newPost = (await db.insert(posts).values(post).returning())[0]

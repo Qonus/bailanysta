@@ -1,14 +1,15 @@
 import { posts } from "@/lib/db/schema";
 import { InferSelectModel } from "drizzle-orm";
 
-export type IPost = InferSelectModel<typeof posts>
+export type Post = InferSelectModel<typeof posts>
 
-export interface IPostUser {
+export interface IPost {
     user: IUser | null;
     id: string;
     userId: string;
     content: string;
     created_at: Date;
+    likes: number;
 }
 
 export interface IUser {

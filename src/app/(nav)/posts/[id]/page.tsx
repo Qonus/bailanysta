@@ -1,5 +1,6 @@
 import { Icons } from "@/components/icons/icons";
 import TopBar from "@/components/top-bar";
+import Username from "@/components/users/username";
 import { auth } from "@/lib/auth";
 import { getTranslations } from "next-intl/server";
 import { notFound, redirect } from "next/navigation";
@@ -27,13 +28,11 @@ export default async function PostPage(
             <TopBar title={t("Sidebar.post")} />
             <div className="page flex flex-col justify-center">
                 <div className="flex pt-5">
-                    <div>
-                        <Icons.profile className="w-fit" user={post.user || undefined} size={60} />
-                    </div>
+                    <Icons.profile className="w-fit" user={post.user || undefined} size={60} />
                     <div className="h-300 px-4 flex flex-col gap-5">
-                        <div className="flex items-center gap-3 text-xl">
-                            <p className="">{post.user?.name}</p>
-                            <p className="text-current/50">@{post.user?.username}</p>
+                        <div className="flex items-center gap-3">
+                            <p className="text-xl font-bold">{post.user?.name}</p>
+                            <Username username={post.user?.username || undefined} className="text-xl" />
                         </div>
                         <h2 className="text-xl">{post.content}</h2>
                     </div>

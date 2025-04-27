@@ -1,4 +1,4 @@
-import SignInForm from "@/components/sign-in-form";
+import SignInForm from "@/components/forms/sign-in-form";
 import { auth } from "@/lib/auth";
 import { getTranslations } from "next-intl/server";
 import { redirect } from "next/navigation";

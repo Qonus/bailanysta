@@ -1,10 +1,10 @@
-import { IPostUser } from "@/types/tables";
+import { IPost } from "@/types/tables";
 import { Box, Tabs, Text } from "@radix-ui/themes";
 import PostCard from "../posts/post-card";
 
 export default function UserActivity(
-    { posts }:
-        { posts: IPostUser[] }
+    { userLikes, posts }:
+        { userLikes: string[], posts: IPost[] }
 ) {
     return (
         <Tabs.Root defaultValue="posts">
@@ -16,7 +16,7 @@ export default function UserActivity(
             <Box>
                 <Tabs.Content value="posts">
                     {posts.map((post) => (
-                        <PostCard key={post.id} post={post} />
+                        <PostCard initialIsLiked={userLikes.includes(post.id)} key={post.id} post={post} />
                     ))}
                 </Tabs.Content>
 

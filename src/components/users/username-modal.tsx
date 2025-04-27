@@ -1,15 +1,13 @@
 'use client';
 
-import { updateUsername } from '@/app/(nav)/users/actions';
-import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { Input } from '@/components/ui/input';
+import { Dialog, DialogContent } from '@/components/ui/dialog';
+import { DialogTitle } from '@radix-ui/react-dialog';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
+import UsernameForm from '../forms/username-form';
 
 export default function ForceUsernameModal({ initialUsername }: { initialUsername: string | null }) {
     const [open, setOpen] = useState(false);
-    const [tempUsername, setTempUsername] = useState('');
 
     useEffect(() => {
         if (!initialUsername) {
@@ -17,30 +15,20 @@ export default function ForceUsernameModal({ initialUsername }: { initialUsernam
         }
     }, [initialUsername]);
 
-    const t = useTranslations("UsernameDialog");
-
+    const t = useTranslations();
     return (
-        <Dialog open={open} onOpenChange={() => { }}>
+        <Dialog
+            open={open} onOpenChange={() => { }}
+        >
             <DialogContent
                 className="sm:max-w-md"
-                onInteractOutside={(e) => e.preventDefault()} // prevent closing by clicking outside
-                onEscapeKeyDown={(e) => e.preventDefault()}   // prevent closing with Esc key
+                onInteractOutside={(e) => e.preventDefault()}
+                onEscapeKeyDown={(e) => e.preventDefault()}
             >
-                <DialogHeader>
-                    <DialogTitle>{t("title")}</DialogTitle>
-                </DialogHeader>
-
-                <form action={updateUsername} className="flex flex-col gap-4">
-                    <Input
-                        placeholder={t("placeholder")}
-                        value={tempUsername}
-                        name="username"
-                        onChange={(e) => setTempUsername(e.target.value)}
-                    />
-                    <Button type='submit' disabled={tempUsername.trim() === ''}>
-                        {t("save")}
-                    </Button>
-                </form>
+                <DialogTitle>
+                    {t("UsernameForm.title")}
+                </DialogTitle>
+                <UsernameForm />
             </DialogContent>
         </Dialog>
     );

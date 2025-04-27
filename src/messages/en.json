@@ -4,10 +4,14 @@
         "call-to-action": "First, you will need to sign into your account",
         "continue-with": "Continue with"
     },
-    "UsernameDialog": {
+    "UsernameForm": {
         "title": "Set your username",
         "placeholder": "username_example",
-        "save": "Save"
+        "save": "Save",
+        "min": "Username is required",
+        "max": "maximum 25 characters",
+        "regex": "Username can only contain letters, numbers, and underscores",
+        "manual": "Username is already taken"
     },
     "Sidebar": {
         "home": "Home",
@@ -22,7 +26,9 @@
     },
     "Profile": {
         "edit": "Edit Profile",
-        "edit-description": "Make changes to your profile here. Click save when you're done."
+        "edit-description": "Make changes to your profile here. Click save when you're done.",
+        "username": "Username",
+        "save": "Save Changes"
     },
     "Settings": {},
     "Post": {

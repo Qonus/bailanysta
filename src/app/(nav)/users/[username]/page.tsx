@@ -1,11 +1,12 @@
-import EditProfileButton from "@/components/edit-profile";
 import { Icons } from "@/components/icons/icons";
 import TopBar from "@/components/top-bar";
+import EditProfileButton from "@/components/users/edit-profile";
 import UserActivity from "@/components/users/user-activity";
+import Username from "@/components/users/username";
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { getUserPosts } from "../../posts/actions";
-import { getUserByID, getUserByUsername } from "../actions";
+import { getUserByID, getUserByUsername, getUserLikes } from "../actions";
 
 export default async function Profile(
     { params,
@@ -22,6 +23,7 @@ export default async function Profile(
     const isCurrentUser = currentUser?.username == username;
 
     const user = await getUserByUsername(username);
+    const userLikes = await getUserLikes(session.user.id);
 
     const posts = await getUserPosts(user?.id || "");
 
@@ -33,22 +35,21 @@ export default async function Profile(
                 <div className="block-border-b p-6 flex flex-col gap-5">
                     <Icons.profile user={user || undefined} size={100} />
                     <div className="flex flex-col gap-5 justify-between md:flex-row">
-                        <div>
+                        <div className="flex md:flex-row md:gap-3 md:items-center items-start flex-col gap-0">
                             <p className="text-xl font-bold">
                                 {user?.name || "Username"}
                             </p>
-                            <p className="text-foreground/50">
-                                @{user?.username || "username"}
-                            </p>
+                            <span className="md:block hidden">•</span>
+                            <Username username={user?.username || undefined} className="text-xl" />
                         </div>
                         {isCurrentUser ?
-                            <EditProfileButton /> :
+                            <EditProfileButton user={user} /> :
                             <></>
                         }
                     </div>
                 </div>
 
-                <UserActivity posts={posts} />
+                <UserActivity userLikes={userLikes} posts={posts} />
 
             </div>
         </>

@@ -2,9 +2,19 @@
 
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
-import { users } from "@/lib/db/schema";
+import { likes, users } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
+
+export async function getUserLikes(userId: string) {
+    const results = await db
+        .select()
+        .from(likes)
+        .where(eq(likes.userId, userId))
+        .execute();
+
+    return results.map((like) => like.postId);
+}
 
 export async function getUserByID(id: string) {
     // const { data } = await axios.get(`${getBaseUrl()}/api/users/${id}`);
@@ -22,16 +32,13 @@ export async function getUserByUsername(username: string) {
     return user;
 }
 
-export async function updateUsername(formData: FormData) {
+export async function updateUsername(username: string) {
     const session = await auth();
     if (!session) return;
 
-    const newUsername = formData.get("username") as string;
-
-    const data = await db.update(users)
-        .set({ username: newUsername, })
+    await db.update(users)
+        .set({ username: username, })
         .where(eq(users.id, session.user.id));
-    console.log(data);
 
-    redirect("/home");
+    redirect(`/users/${username}`);
 }

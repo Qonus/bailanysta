@@ -13,14 +13,13 @@ export default function ProfileIcon({
 }) {
 
     return (
-        <div
-            // href={`/users/${user?.username}`}
-            className={cn("rounded-full overflow-hidden relative border-2 border-violet-500/20", className)}
-            style={{ width: size, height: size }}
-        // {...props}
-        >
-            <div>
-
+        <div>
+            <div
+                // href={`/users/${user?.username}`}
+                className={cn("rounded-full overflow-hidden border-2 border-violet-500/20", className)}
+                style={{ width: size, height: size }}
+            // {...props}
+            >
                 <Image
                     src={user?.image || "/default-profile-picture.png"}
                     width={400}

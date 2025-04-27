@@ -10,7 +10,7 @@ export default function Username({
     className?: string
 }) {
     return (
-        <Button variant="link" className={cn("p-0 text-current/50", className)}>
+        <Button variant="link" className={cn("p-0 text-current/50", className)} asChild>
             <Link href={`/users/${username}`}>
                 @{username}
             </Link>

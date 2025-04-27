@@ -1,7 +1,7 @@
 import { signIn } from "@/lib/auth";
 import { getTranslations } from "next-intl/server";
-import { Icons } from "./icons/icons";
-import { Button } from "./ui/button";
+import { Icons } from "../icons/icons";
+import { Button } from "../ui/button";
 
 
 export default async function SignInForm() {

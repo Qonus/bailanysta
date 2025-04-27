@@ -8,8 +8,8 @@ import {
 } from "@/components/ui/dialog"
 import { useTranslations } from "next-intl"
 import { useState } from "react"
+import PostForm from "./forms/post-form"
 import { Icons } from "./icons/icons"
-import PostForm from "./post-form"
 import { Button } from "./ui/button"
 
 export default function PostButton() {
