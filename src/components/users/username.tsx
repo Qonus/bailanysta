@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { Button } from "../ui/button";
 
@@ -9,7 +10,7 @@ export default function Username({
     className?: string
 }) {
     return (
-        <Button variant="link" className="p-0 text-current/50">
+        <Button variant="link" className={cn("p-0 text-current/50", className)}>
             <Link href={`/users/${username}`}>
                 @{username}
             </Link>
