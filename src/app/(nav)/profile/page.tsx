@@ -1,21 +1,14 @@
-import EditProfileButton from "@/components/edit-profile";
-import { Icons } from "@/components/icons/icons";
-import TopBar from "@/components/top-bar";
-import UserActivity from "@/components/users/user-activity";
-import { auth } from "@/lib/auth";
-import { redirect } from "next/navigation";
-import { getUserPosts } from "../posts/actions";
 
 export default async function Profile() {
-  const session = await auth();
-  // const t = await getTranslations('Profile');
-  if (!session) redirect('sign-in');
+  // const session = await auth();
+  // // const t = await getTranslations('Profile');
+  // if (!session) redirect('sign-in');
 
-  const posts = await getUserPosts(session.user.id);
+  // const posts = await getUserPosts(session.user.id);
 
   return (
     <>
-      <TopBar title="Profile" />
+      {/* <TopBar title="Profile" />
       <div className="pt-10 m-auto">
 
         <div className="block-border-b p-6 flex flex-col gap-5">
@@ -35,7 +28,7 @@ export default async function Profile() {
 
         <UserActivity posts={posts} />
 
-      </div>
+      </div> */}
     </>
   );
 }

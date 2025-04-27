@@ -16,6 +16,7 @@ export const users = pgTable("user", {
     email: text("email").unique(),
     emailVerified: timestamp("emailVerified", { mode: "date" }),
     image: text("image"),
+    username: varchar({ length: 25 }).unique(),
 })
 
 export const accounts = pgTable(
