@@ -1,14 +1,17 @@
+"use server";
+
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
-import { posts } from "@/lib/db/schema";
-import { getBaseUrl } from "@/lib/utils";
-import axios from "axios";
-import { desc } from "drizzle-orm";
+import { posts, users } from "@/lib/db/schema";
+import { desc, eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
 
 export async function getUser(id: string) {
-    const { data } = await axios.get(`${getBaseUrl()}/api/users/${id}`);
-    return data;
+    // const { data } = await axios.get(`${getBaseUrl()}/api/users/${id}`);
+    const user = await db.query.users.findFirst({
+        where: eq(users.id, id)
+    });
+    return user;
 }
 
 export async function getPosts() {
@@ -20,14 +23,21 @@ export async function getPosts() {
 }
 
 export async function getUserPosts(userId: string) {
-    const { data } = await axios.get(`${getBaseUrl()}/api/posts?userid=${userId}`);
+    // const { data } = await axios.get(`${getBaseUrl()}/api/posts?userid=${userId}`);
+    const data = await db.query.posts.findMany({
+        orderBy: [desc(posts.created_at)],
+        where: eq(posts.userId, userId as string),
+    });
     return data;
 }
 
 export async function getPost(id: string) {
-    const { data } = await axios.get(`${getBaseUrl()}/api/posts/${id}`);
+    // const { data } = await axios.get(`${getBaseUrl()}/api/posts/${id}`);
     // const user_response = await fetch(`${getBaseUrl()}/api/users/${post.userId}`, { cache: "no-store" })
-    return data;
+    const post = await db.query.posts.findFirst({
+        where: eq(posts.id, id)
+    });
+    return post;
 }
 
 export async function createPost(formData: FormData) {
@@ -39,11 +49,13 @@ export async function createPost(formData: FormData) {
         content: formData.get("content") as string,
     };
 
-    const { data: newPost } = await axios.post(`${getBaseUrl()}/api/posts/`, post, {
-        headers: {
-            'Content-Type': 'application/json',
-        }
-    });
+    const newPost = (await db.insert(posts).values(post).returning())[0]
+
+    // const { data: newPost } = await axios.post(`${getBaseUrl()}/api/posts/`, post, {
+    //     headers: {
+    //         'Content-Type': 'application/json',
+    //     }
+    // });
 
     // toast.success(
     //     "Posted Successfully! Your Post:",

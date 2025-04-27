@@ -1,15 +1,17 @@
 import EditProfileButton from "@/components/edit-profile";
 import { Icons } from "@/components/icons/icons";
 import TopBar from "@/components/top-bar";
+import UserActivity from "@/components/users/user-activity";
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
+import { getUserPosts } from "../posts/actions";
 
 export default async function Profile() {
   const session = await auth();
   // const t = await getTranslations('Profile');
   if (!session) redirect('sign-in');
 
-  // const posts = await getUserPosts(session.user.id);
+  const posts = await getUserPosts(session.user.id);
 
   return (
     <>
@@ -31,7 +33,7 @@ export default async function Profile() {
           </div>
         </div>
 
-        {/* <UserActivity posts={posts} /> */}
+        <UserActivity posts={posts} />
 
       </div>
     </>
