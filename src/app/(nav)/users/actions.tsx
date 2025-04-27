@@ -29,7 +29,7 @@ export async function updateUsername(formData: FormData) {
     const newUsername = formData.get("username") as string;
 
     const data = await db.update(users)
-        .set({ username: newUsername.toLowerCase(), })
+        .set({ username: newUsername, })
         .where(eq(users.id, session.user.id));
     console.log(data);
 

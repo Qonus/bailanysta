@@ -28,9 +28,9 @@ export default async function PostPage(
             <div className="page flex flex-col justify-center">
                 <div className="flex pt-5">
                     <div>
-                        <Icons.profile className="w-fit" image={post.user?.image || undefined} size={60} />
+                        <Icons.profile className="w-fit" user={post.user || undefined} size={60} />
                     </div>
-                    <div className="h-1000 px-4 flex flex-col gap-5">
+                    <div className="h-300 px-4 flex flex-col gap-5">
                         <div className="flex items-center gap-3 text-xl">
                             <p className="">{post.user?.name}</p>
                             <p className="text-current/50">@{post.user?.username}</p>

@@ -68,7 +68,7 @@ export default async function AppSidebar({ user }: { user?: IUser }) {
 			<DropdownMenu>
 				<DropdownMenuTrigger asChild>
 					<Button variant='ghost' className="rounded-full h-15 p-2 justify-start">
-						<Icons.profile image={user?.image || undefined} />
+						<Icons.profile user={user || undefined} />
 						<div className="hidden md:flex flex-col text-left">
 							<p>{user?.name || "Name"}</p>
 							<p className="text-sm">{`@${user?.username}` || "@username"}</p>

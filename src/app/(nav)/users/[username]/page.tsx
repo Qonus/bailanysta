@@ -31,7 +31,7 @@ export default async function Profile(
             <TopBar title="Profile" />
             <div className="pt-10 m-auto">
                 <div className="block-border-b p-6 flex flex-col gap-5">
-                    <Icons.profile image={user?.image || undefined} size={100} />
+                    <Icons.profile user={user || undefined} size={100} />
                     <div className="flex flex-col gap-5 justify-between md:flex-row">
                         <div>
                             <p className="text-xl font-bold">
