@@ -2,49 +2,39 @@
 
 import { auth } from "@/lib/auth";
 import { getBaseUrl } from "@/lib/utils";
+import axios from "axios";
 import { redirect } from "next/navigation";
 
 export async function getPosts() {
-    const data = await fetch(`${getBaseUrl()}/api/posts/`, { cache: "no-store" });
-    const posts = await data.json();
-    return posts;
+    const { data } = await axios.get(`${getBaseUrl()}/api/posts/`);
+    return data;
 }
 
 export async function getUserPosts(userId: string) {
-    const data = await fetch(`${getBaseUrl()}/api/posts?userid=${userId}`, { cache: "no-store" });
-    const posts = await data.json();
-    return posts;
+    const { data } = await axios.get(`${getBaseUrl()}/api/posts?userid=${userId}`);
+    return data;
 }
 
 export async function getPost(id: string) {
-    const response = await fetch(`${getBaseUrl()}/api/posts/${id}`, { cache: "no-store" });
-    const post = await response.json();
+    const { data } = await axios.get(`${getBaseUrl()}/api/posts/${id}`);
     // const user_response = await fetch(`${getBaseUrl()}/api/users/${post.userId}`, { cache: "no-store" })
-    return post;
+    return data;
 }
 
 export async function createPost(formData: FormData) {
     const session = await auth();
-
     if (!session) return;
 
     const post = {
         userId: session.user.id,
         content: formData.get("content") as string,
-    }
+    };
 
-    const data = await fetch(`${getBaseUrl()}/api/posts/`,
-        {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(post),
+    const { data: newPost } = await axios.post(`${getBaseUrl()}/api/posts/`, post, {
+        headers: {
+            'Content-Type': 'application/json',
         }
-    );
-
-    const newPost = await data.json();
-
+    });
     // toast.success(
     //     "Posted Successfully! Your Post:",
     //     {
