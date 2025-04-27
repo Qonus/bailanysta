@@ -9,7 +9,7 @@ export default async function Home({ }) {
   const posts = await getPosts();
 
   const session = await auth();
-  if (!session) redirect('/sign-in');
+  if (!session || !session.user) redirect('/sign-in');
 
   // const t = await getTranslations('HomePage');
 
