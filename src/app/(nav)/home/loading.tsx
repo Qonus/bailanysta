@@ -1,7 +1,7 @@
 export default function HomeLoading() {
     return (
         <>
-            LOADIN..
+            Loading..
         </>
     );
 }

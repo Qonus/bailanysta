@@ -1,5 +1,3 @@
-'use server'
-
 import { auth } from "@/lib/auth";
 import { getBaseUrl } from "@/lib/utils";
 import axios from "axios";
@@ -35,6 +33,7 @@ export async function createPost(formData: FormData) {
             'Content-Type': 'application/json',
         }
     });
+
     // toast.success(
     //     "Posted Successfully! Your Post:",
     //     {
@@ -49,5 +48,6 @@ export async function createPost(formData: FormData) {
     //         }
     //     }
     // );
+
     redirect(`/posts/${newPost.id}`);
 }
