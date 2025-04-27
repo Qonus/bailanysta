@@ -1,6 +1,9 @@
 import { auth } from "@/lib/auth";
+import { db } from "@/lib/db";
+import { posts } from "@/lib/db/schema";
 import { getBaseUrl } from "@/lib/utils";
 import axios from "axios";
+import { desc } from "drizzle-orm";
 import { redirect } from "next/navigation";
 
 export async function getUser(id: string) {
@@ -9,7 +12,10 @@ export async function getUser(id: string) {
 }
 
 export async function getPosts() {
-    const { data } = await axios.get(`${getBaseUrl()}/api/posts/`);
+    // const { data } = await axios.get(`${getBaseUrl()}/api/posts/`);
+    const data = await db.query.posts.findMany({
+        orderBy: [desc(posts.created_at)],
+    });
     return data;
 }
 
