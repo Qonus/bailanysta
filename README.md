@@ -7,6 +7,8 @@
 
 Bailanysta is a minimalist social platform where users can share thoughts, interact with posts, and personalize their experience.
 
+link to the video -> https://www.dropbox.com/scl/fi/x6z3bmkxe3ewhjdn7ttfd/clideo_editor_ae9c14493250473690e7f7fd67cd36fa.mp4?rlkey=6kgf08483mtl8vvudo9hkhlco&st=o0ie49a3&dl=0
+
 ## ✨ Key Features
 - **OAuth Integration**  
   Secure login via Google Auth
