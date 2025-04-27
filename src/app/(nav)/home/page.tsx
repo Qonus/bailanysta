@@ -2,7 +2,6 @@ import { Icons } from "@/components/icons/icons";
 import PostCard from "@/components/posts/post-card";
 import { auth } from "@/lib/auth";
 import { IPost } from "@/types/tables";
-import { getTranslations } from "next-intl/server";
 import { redirect } from "next/navigation";
 import { getPosts } from "../posts/actions";
 
@@ -12,7 +11,7 @@ export default async function Home({ }) {
   const session = await auth();
   if (!session || !session.user) redirect('/sign-in');
 
-  const t = await getTranslations('HomePage');
+  // const t = await getTranslations('HomePage');
 
   return (
     <div>
