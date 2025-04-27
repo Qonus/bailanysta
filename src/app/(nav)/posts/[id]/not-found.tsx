@@ -7,8 +7,8 @@ export default async function PostNotFound() {
         <>
             <TopBar title={t("Sidebar.post")} />
             <div className="flex flex-col gap-4 h-screen items-center justify-center">
-                <h1 className="text-2xl">404 - Post Not Found</h1>
-                <p>The page you're looking for does not exist.</p>
+                <h1 className="text-2xl">{t("NotFound.title")}</h1>
+                <p>{t("NotFound.description")}</p>
             </div>
         </>
     );

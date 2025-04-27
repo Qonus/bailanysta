@@ -23,5 +23,9 @@
     "Post": {
         "title": "What's new?",
         "placeholder": "Type here..."
+    },
+    "NotFound": {
+        "title": "404 - Post Not Found",
+        "description": "The page you're looking for does not exist."
     }
 }
