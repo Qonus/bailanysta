@@ -95,12 +95,12 @@ link to the video -> https://www.dropbox.com/scl/fi/x6z3bmkxe3ewhjdn7ttfd/clideo
 3. **NeonDB** - Free tier perfect for early-stage projects
 4. **Vercel** - Seamless integration with Next.js, Github projects
 
-## ⚠️ Known Issues
-1. **Media Limitations**  
-   - Cannot upload images (planned via Next.js Image Optimization)
+## ⚠️ Known Issues/Compromises 
+1. **Post Dialog*" - post dialog doesn't close after submition which could lead to double posting.
 2. **Content Management**  
    - Posts are permanent (no edit/delete)
-3. **Social Features**
-   - No commenting/threading system
+3. **DATABASE_URL** - isn't entirely safe, but securing it causes an error so I chose to leave it unsafe.
 4. **Notifications**
    - Interaction alerts not implemented
+5. **API interaction** - project is not using it's own API, because fetching data from it causes errors, and it is faster to not fetch from it.
+6. **API support** - it is not up to date
