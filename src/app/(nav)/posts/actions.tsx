@@ -4,7 +4,6 @@ import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { likes, posts, users } from "@/lib/db/schema";
 import { and, count, desc, eq } from "drizzle-orm";
-import { redirect } from "next/navigation";
 
 // export async function getLike(userId: string, postId: string) {
 //     const data = await db.query.likes.whe
@@ -136,6 +135,7 @@ export async function createPost(content: string) {
     };
 
     const newPost = (await db.insert(posts).values(post).returning())[0]
+    return newPost;
 
     // const { data: newPost } = await axios.post(`${getBaseUrl()}/api/posts/`, post, {
     //     headers: {
@@ -157,6 +157,4 @@ export async function createPost(content: string) {
     //         }
     //     }
     // );
-
-    redirect(`/posts/${newPost.id}`);
 }

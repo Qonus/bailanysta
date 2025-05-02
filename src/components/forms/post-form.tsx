@@ -1,6 +1,7 @@
 import { createPost } from "@/app/(nav)/posts/actions";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "../ui/button";
@@ -8,6 +9,7 @@ import { Textarea } from "../ui/textarea";
 
 export default function PostForm() {
     const t = useTranslations("PostForm");
+    const router = useRouter();
 
     const formSchema = z.object({
         content: z.string()
@@ -26,7 +28,8 @@ export default function PostForm() {
     });
 
     const onSubmit = async (data: FormData) => {
-        await createPost(data.content);
+        const newPost = await createPost(data.content);
+        router.push(`/posts/${newPost?.id}`);
     }
 
     return (

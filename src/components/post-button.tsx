@@ -1,19 +1,19 @@
-'use client'
+'use client';
 import {
     Dialog,
     DialogContent,
     DialogHeader,
     DialogTitle,
     DialogTrigger
-} from "@/components/ui/dialog"
-import { useTranslations } from "next-intl"
-import { useState } from "react"
-import PostForm from "./forms/post-form"
-import { Icons } from "./icons/icons"
-import { Button } from "./ui/button"
+} from "@/components/ui/dialog";
+import { useTranslations } from "next-intl";
+import { useState } from "react";
+import PostForm from "./forms/post-form";
+import { Icons } from "./icons/icons";
+import { Button } from "./ui/button";
 
 export default function PostButton() {
-    const [open, setOpen] = useState(false)
+    const [open, setOpen] = useState(false);
     const t = useTranslations();
     return (
         <Dialog open={open} onOpenChange={setOpen}>
