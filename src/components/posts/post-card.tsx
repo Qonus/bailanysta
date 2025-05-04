@@ -19,12 +19,12 @@ export default function PostCard(
             <div onClick={() => { router.push(`/posts/${post.id}`) }} className="cursor-pointer block-border-t p-4 flex">
                 <Icons.profile user={post.user || undefined} size={40} />
                 <div className="px-2 flex flex-col gap-2">
-                    <div className="flex items-center gap-1 text-md">
-                        <p className="">{post.user?.name}</p>
-                        <Username username={post.user?.username || undefined} />
-                        <p>{formatRelativeTime(post.created_at, locale)}</p>
+                    <div className="">
+                        <span className="font-bold inline-block pr-2">{post.user?.name}</span>
+                        <Username username={post.user?.username || undefined} className="inline-block pr-2" />
+                        <span className="inline-block">{formatRelativeTime(post.created_at, locale)}</span>
                     </div>
-                    <h2 className="text-lg">{post.content}</h2>
+                    <h2 className="text-lg whitespace-pre-line">{post.content}</h2>
                 </div>
             </div>
             <div className="flex gap-3 px-5 py-2">

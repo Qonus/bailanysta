@@ -34,12 +34,12 @@ export default async function PostPage(
                 <div className="flex pt-5">
                     <Icons.profile className="w-fit" user={post.user || undefined} size={60} />
                     <div className="px-4 flex flex-col gap-5">
-                        <div className="flex items-center gap-3">
-                            <p className="text-xl font-bold">{post.user?.name}</p>
-                            <Username username={post.user?.username || undefined} className="text-xl" />
-                            <p>{formatRelativeTime(post.created_at, locale)}</p>
+                        <div className="block">
+                            <span className="text-xl font-bold inline-block pr-3">{post.user?.name}</span>
+                            <Username username={post.user?.username || undefined} className="text-xl inline-block pr-3" />
+                            <span className="inline-block">{formatRelativeTime(post.created_at, locale)}</span>
                         </div>
-                        <h2 className="text-xl">{post.content}</h2>
+                        <h2 className="text-xl whitespace-pre-line">{post.content}</h2>
                     </div>
                 </div>
                 <div className="flex gap-3 px-5 py-2">
