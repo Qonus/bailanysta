@@ -122,12 +122,7 @@
   }
 }
 
-@layer utilities {
-  .container {
-    max-width: 1000px;
-    @apply m-auto
-  }
-
+@layer components {
   .page {
     max-width: 900px;
     @apply w-full px-4 md:px-6
@@ -135,6 +130,10 @@
 
   .nav-button {
     @apply rounded-full h-13 text-lg cursor-pointer w-fit
+  }
+
+  .input {
+    @apply w-full outline-none resize-none
   }
 
   .block-border-b {
@@ -147,5 +146,12 @@
 
   .hover-block {
     @apply duration-100 hover:bg-current/8
+  }
+}
+
+@layer utilities {
+  .container {
+    max-width: 1000px;
+    @apply m-auto
   }
 }

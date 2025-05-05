@@ -3,9 +3,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import TextareaAutoSize from "react-textarea-autosize";
 import { z } from "zod";
 import { Button } from "../ui/button";
-import { Textarea } from "../ui/textarea";
 
 export default function PostForm() {
     const t = useTranslations("PostForm");
@@ -35,11 +35,11 @@ export default function PostForm() {
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-end gap-5">
             <div className="w-full">
-                <Textarea
+                <TextareaAutoSize
                     {...register("content")}
                     placeholder={t("placeholder")}
-                    rows={3}
-                    className="resize-none" />
+                    maxRows={10}
+                    className="input" />
                 {errors.content &&
                     <p className="text-destructive">
                         {errors.content.message}
