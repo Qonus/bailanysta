@@ -3,8 +3,8 @@ import type { AdapterAccountType } from "next-auth/adapters";
 
 export const posts = pgTable("posts", {
     id: text().primaryKey().$defaultFn(() => crypto.randomUUID()),
-    postId: text().references(() => posts.id, { onDelete: "cascade" }).default(undefined),  
     userId: text().notNull().references(() => users.id, { onDelete: "cascade" }),
+    repostId: text().references((): any => posts.id, { onDelete: "cascade" }),
     content: varchar({ length: 1024 }).notNull(),
     created_at: timestamp({ mode: "date" }).defaultNow().notNull(),
     updated_at: timestamp({ mode: "date" }).defaultNow().notNull()

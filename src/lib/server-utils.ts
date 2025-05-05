@@ -8,3 +8,11 @@ export async function getIsMobile() {
     const isMobile = device?.type === 'mobile'
     return isMobile;
 }
+
+export async function getBaseUrl() {
+    const headersList = await headers();
+    const host = headersList.get('host');
+    const protocol = headersList.get('x-forwarded-proto') || 'http';
+    const baseUrl = `${protocol}://${host}`;
+    return baseUrl;
+}
