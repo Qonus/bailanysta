@@ -19,6 +19,13 @@ export const comments = pgTable("comments", {
     updated_at: timestamp({ mode: "date" }).defaultNow().notNull()
 });
 
+export const follows = pgTable("follows", {
+    id: text().primaryKey().$defaultFn(() => crypto.randomUUID()),
+    followerId: text().notNull().references(() => users.id, { onDelete: "cascade" }),
+    userId: text().notNull().references(() => users.id, { onDelete: "cascade" }),
+    created_at: timestamp({ mode: "date" }).defaultNow().notNull(),
+});
+
 export const likes = pgTable("likes", {
     id: text().primaryKey().$defaultFn(() => crypto.randomUUID()),
     postId: text().notNull().references(() => posts.id, { onDelete: "cascade" }),

@@ -5,19 +5,13 @@ import { and, count, desc, eq } from "drizzle-orm";
 import { db } from "../../../../db";
 import { likes, posts, users } from "../../../../db/schema";
 
-// export async function getLike(userId: string, postId: string) {
-//     const data = await db.query.likes.whe
-// }
-
 export async function getLike(userId: string, postId: string) {
     const result = await db
         .select()
         .from(likes)
         .where(
             and(eq(likes.userId, userId), eq(likes.postId, postId))
-        )
-        .limit(1)
-        .execute();
+        );
 
     return result.length > 0 ? result[0] : null;
 }
@@ -61,8 +55,7 @@ export async function getPosts() {
         .leftJoin(users, eq(posts.userId, users.id))
         .leftJoin(likes, eq(posts.id, likes.postId))
         .groupBy(posts.id, users.id)
-        .orderBy(desc(posts.created_at))
-        .execute();
+        .orderBy(desc(posts.created_at));
 
     return data.map((item) => ({
         ...item.post,
@@ -85,8 +78,7 @@ export async function getUserPosts(userId: string) {
         .leftJoin(likes, eq(posts.id, likes.postId))
         .where(eq(posts.userId, userId))
         .groupBy(posts.id, users.id)
-        .orderBy(desc(posts.created_at))
-        .execute();
+        .orderBy(desc(posts.created_at));
 
     return data.map((item) => ({
         ...item.post,
@@ -113,8 +105,7 @@ export async function getPost(id: string) {
         .leftJoin(users, eq(posts.userId, users.id))
         .leftJoin(likes, eq(posts.id, likes.postId))
         .where(eq(posts.id, id))
-        .groupBy(posts.id, users.id)
-        .execute();
+        .groupBy(posts.id, users.id);
 
     const post = data[0];
 
