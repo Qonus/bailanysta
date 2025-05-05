@@ -1,10 +1,10 @@
 "use server";
 
 import { auth } from "@/lib/auth";
-import { db } from "@/lib/db";
-import { likes, users } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
+import { db } from "../../../../db";
+import { likes, users } from "../../../../db/schema";
 
 export async function getUserLikes(userId: string) {
     const results = await db

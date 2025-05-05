@@ -1,9 +1,9 @@
 "use server";
 
 import { auth } from "@/lib/auth";
-import { db } from "@/lib/db";
-import { likes, posts, users } from "@/lib/db/schema";
 import { and, count, desc, eq } from "drizzle-orm";
+import { db } from "../../../../db";
+import { likes, posts, users } from "../../../../db/schema";
 
 // export async function getLike(userId: string, postId: string) {
 //     const data = await db.query.likes.whe

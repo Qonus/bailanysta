@@ -1,5 +1,5 @@
-import { posts } from "@/lib/db/schema";
 import { InferSelectModel } from "drizzle-orm";
+import { posts } from "../../db/schema";
 
 export type Post = InferSelectModel<typeof posts>
 

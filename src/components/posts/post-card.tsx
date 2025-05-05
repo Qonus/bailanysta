@@ -12,7 +12,7 @@ export default function PostCard(
     { className, post, initialIsLiked }: { className?: string, post: IPost, initialIsLiked: boolean }
 ) {
     const router = useRouter();
-    const locale = useLocale()
+    const locale = useLocale();
 
     return (
         <div className={cn("w-full h-fit hover-block", className)}>

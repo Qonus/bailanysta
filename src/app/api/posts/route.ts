@@ -1,6 +1,6 @@
-import { db } from "@/lib/db";
-import { posts } from "@/lib/db/schema";
 import { NextRequest } from "next/server";
+import { db } from "../../../../db";
+import { posts } from "../../../../db/schema";
 
 export async function GET(
     request: NextRequest   // eslint-disable-line @typescript-eslint/no-unused-vars

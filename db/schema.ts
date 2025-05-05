@@ -2,16 +2,27 @@ import { boolean, integer, pgTable, primaryKey, text, timestamp, unique, varchar
 import type { AdapterAccountType } from "next-auth/adapters";
 
 export const posts = pgTable("posts", {
-    id: text("id").primaryKey().$defaultFn(() => crypto.randomUUID()),
-    userId: text("userId").notNull().references(() => users.id, { onDelete: "cascade" }),
-    content: varchar({ length: 255 }).notNull(),
+    id: text().primaryKey().$defaultFn(() => crypto.randomUUID()),
+    postId: text().references(() => posts.id, { onDelete: "cascade" }).default(undefined),  
+    userId: text().notNull().references(() => users.id, { onDelete: "cascade" }),
+    content: varchar({ length: 1024 }).notNull(),
     created_at: timestamp({ mode: "date" }).defaultNow().notNull(),
+    updated_at: timestamp({ mode: "date" }).defaultNow().notNull()
+});
+
+export const comments = pgTable("comments", {
+    id: text().primaryKey().$defaultFn(() => crypto.randomUUID()),
+    postId: text().notNull().references(() => posts.id, { onDelete: "cascade" }),
+    userId: text().notNull().references(() => users.id, { onDelete: "cascade" }),
+    content: varchar({ length: 1024 }).notNull(),
+    created_at: timestamp({ mode: "date" }).defaultNow().notNull(),
+    updated_at: timestamp({ mode: "date" }).defaultNow().notNull()
 });
 
 export const likes = pgTable("likes", {
-    id: text("id").primaryKey().$defaultFn(() => crypto.randomUUID()),
-    postId: text("postId").notNull().references(() => posts.id, { onDelete: "cascade" }),
-    userId: text("userId").notNull().references(() => users.id, { onDelete: "cascade" }),
+    id: text().primaryKey().$defaultFn(() => crypto.randomUUID()),
+    postId: text().notNull().references(() => posts.id, { onDelete: "cascade" }),
+    userId: text().notNull().references(() => users.id, { onDelete: "cascade" }),
 },
     (table) => ({
         uniqueUserPost: unique().on(table.userId, table.postId),

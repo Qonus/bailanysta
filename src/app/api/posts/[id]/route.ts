@@ -1,7 +1,7 @@
-import { db } from "@/lib/db";
-import { likes, posts, users } from "@/lib/db/schema";
 import { count, eq } from "drizzle-orm";
 import { NextRequest } from "next/server";
+import { db } from "../../../../../db";
+import { likes, posts, users } from "../../../../../db/schema";
 
 export async function GET(
     request: NextRequest,  // eslint-disable-line @typescript-eslint/no-unused-vars
