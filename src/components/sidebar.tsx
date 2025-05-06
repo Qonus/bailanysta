@@ -5,7 +5,6 @@ import { Icons } from "./icons/icons";
 import LogoutButton from "./logout-button";
 import PostButton from "./post-button";
 import ThemeSwitcher from "./theme-switcher";
-import { Button } from "./ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "./ui/dropdown-menu";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./ui/tooltip";
 
@@ -46,12 +45,12 @@ export default async function AppSidebar({ user }: { user?: IUser }) {
 					{data.nav.map((item) => (
 						<Tooltip key={item.title} delayDuration={0}>
 							<TooltipTrigger asChild>
-								<Button variant='ghost' className="nav-button pl-2" asChild>
-									<Link href={item.url} className="flex">
+								<button className="button ghost">
+									<Link href={item.url} className="flex gap-2">
 										{item.icon && <item.icon className="size-7" />}
 										<span className="hidden md:block">{t(item.title)}</span>
 									</Link>
-								</Button>
+								</button>
 							</TooltipTrigger>
 							<TooltipContent
 								side="right"
@@ -68,22 +67,22 @@ export default async function AppSidebar({ user }: { user?: IUser }) {
 			</div>
 			<DropdownMenu>
 				<DropdownMenuTrigger asChild>
-					<Button variant='ghost' className="rounded-full h-15 p-2 justify-start">
+					<button className="button ghost py-2 w-full">
 						<Icons.profile user={user || undefined} />
 						<div className="hidden md:flex flex-col text-left">
 							<p>{user?.name || "Name"}</p>
 							<p className="text-sm">{`@${user?.username}` || "@username"}</p>
 						</div>
-					</Button>
+					</button>
 				</DropdownMenuTrigger>
 				<DropdownMenuContent className="flex items-center gap-5" side="right">
 					<DropdownMenuItem asChild>
-						<Button variant='ghost' className="nav-button pl-2" asChild>
+						<button className="button pl-2">
 							<a href={`/users/${user?.username}`} className="flex">
 								<Icons.user className="size-7" />
 								<span className="hidden md:block">{t('profile')}</span>
 							</a>
-						</Button>
+						</button>
 					</DropdownMenuItem>
 					<DropdownMenuItem className="rounded-full" asChild>
 						<LogoutButton />

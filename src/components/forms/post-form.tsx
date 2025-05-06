@@ -1,11 +1,10 @@
-import { createPost } from "@/app/(nav)/posts/actions";
 import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import TextareaAutoSize from "react-textarea-autosize";
 import { z } from "zod";
-import { Button } from "../ui/button";
 
 export default function PostForm() {
     const t = useTranslations("PostForm");
@@ -14,7 +13,7 @@ export default function PostForm() {
     const formSchema = z.object({
         content: z.string()
             .min(1, t("min"))
-            .max(255, t("max"))
+            .max(1024, t("max"))
     });
 
     type FormData = z.infer<typeof formSchema>;
@@ -28,7 +27,8 @@ export default function PostForm() {
     });
 
     const onSubmit = async (data: FormData) => {
-        const newPost = await createPost(data.content);
+        const res = await axios.post("/api/posts", data);
+        const newPost = res.data;
         router.push(`/posts/${newPost?.id}`);
     }
 
@@ -46,14 +46,14 @@ export default function PostForm() {
                     </p>
                 }
             </div>
-            <Button
+            <button
                 type="submit"
-                className="nav-button"
+                className="button default py-2 px-4"
             >
                 <p className="text-lg">
                     {t("post")}
                 </p>
-            </Button>
+            </button>
         </form>
     )
 }

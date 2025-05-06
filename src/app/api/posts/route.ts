@@ -1,3 +1,4 @@
+import { auth } from "@/lib/auth";
 import { NextRequest } from "next/server";
 import { db } from "../../../../db";
 import { posts } from "../../../../db/schema";
@@ -27,9 +28,18 @@ export async function GET(
 }
 
 export async function POST(request: Request) {
+    const body = await request.json();
+
     try {
-        const body = await request.json();
-        const newPost = (await db.insert(posts).values(body).returning())[0]
+        const session = await auth();
+        if (!session?.user?.id) {
+            return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401 });
+        }
+
+        const [newPost] = await db.insert(posts).values({
+            userId: session.user.id,
+            content: body.content
+        }).returning()
 
         return new Response(JSON.stringify(newPost), {
             status: 201,

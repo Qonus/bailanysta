@@ -128,8 +128,16 @@
     @apply w-full px-4 md:px-6
   }
 
-  .nav-button {
-    @apply rounded-full h-13 text-lg cursor-pointer w-fit
+  .button {
+    @apply rounded-full h-fit text-lg cursor-pointer w-fit p-3 flex gap-2 items-center
+  }
+
+  .ghost {
+    @apply hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50
+  }
+
+  .default {
+    @apply bg-primary text-primary-foreground shadow-xs hover:bg-primary/90
   }
 
   .input {

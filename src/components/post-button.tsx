@@ -10,7 +10,6 @@ import { useTranslations } from "next-intl";
 import { useState } from "react";
 import PostForm from "./forms/post-form";
 import { Icons } from "./icons/icons";
-import { Button } from "./ui/button";
 
 export default function PostButton() {
     const [open, setOpen] = useState(false);
@@ -18,12 +17,12 @@ export default function PostButton() {
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
-                <Button className="nav-button md:w-full" >
+                <button className="button default justify-center md:w-full" >
                     <Icons.post className="size-7" />
                     <span className="hidden md:block font-bold pr-5">
                         {t("Sidebar.post")}
                     </span>
-                </Button>
+                </button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
