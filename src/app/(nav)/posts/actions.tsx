@@ -1,6 +1,8 @@
 "use server";
 
 import { auth } from "@/lib/auth";
+import { getBaseUrl } from "@/lib/server-utils";
+import axios from "axios";
 import { and, count, desc, eq } from "drizzle-orm";
 import { db } from "../../../../db";
 import { likes, posts, users } from "../../../../db/schema";
@@ -116,36 +118,6 @@ export async function getPost(id: string) {
     };
 }
 
-export async function createPost(content: string) {
-    const session = await auth();
-    if (!session) return;
-
-    const post = {
-        userId: session.user.id,
-        content: content,
-    };
-
-    const newPost = (await db.insert(posts).values(post).returning())[0]
-    return newPost;
-
-    // const { data: newPost } = await axios.post(`${getBaseUrl()}/api/posts/`, post, {
-    //     headers: {
-    //         'Content-Type': 'application/json',
-    //     }
-    // });
-
-    // toast.success(
-    //     "Posted Successfully! Your Post:",
-    //     {
-    //         description: (
-    //             <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4" >
-    //                 <code className="text-white"> {JSON.stringify(post, null, 2)} </code>
-    //             </pre>
-    //         ),
-    //         action: {
-    //             label: "Undo",
-    //             onClick: () => console.log("Undo")
-    //         }
-    //     }
-    // );
+export async function deletePost(id: string) {
+    await axios.delete(`${await getBaseUrl()}/api/posts/${id}`);
 }

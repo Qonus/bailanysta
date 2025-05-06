@@ -35,11 +35,27 @@ export async function GET(
     });
 }
 
-// export async function DELETE(
-//     request: NextRequest,
-//     { params }: { params: Promise<{ id: string }> },
-// ) {
-//     const id = (await params).id;
-//     // e.g. Delete user with ID `id` in DB
-//     return new Response(null, { status: 204 });
-// }
+export async function DELETE(
+    request: NextRequest,  // eslint-disable-line @typescript-eslint/no-unused-vars
+    { params }: { params: Promise<{ id: string }> },
+) {
+    const { id } = await params;
+    try {
+        const [post] = await db.delete(posts).where(eq(posts.id, id)).returning();
+
+        return new Response(JSON.stringify(post), {
+            status: 201,
+            headers: { "Content-Type": "application/json" }
+        })
+    } catch (e) {
+        console.log(e);
+        return new Response(JSON.stringify({
+            error: "Internal server error",
+            details: e instanceof Error ? e.message : String(e)
+        }), {
+            status: 500,
+            headers: { 'Content-Type': 'application/json' }
+        });
+    }
+    return new Response(null, { status: 204 });
+}
