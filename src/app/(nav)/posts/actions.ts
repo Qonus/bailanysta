@@ -4,6 +4,7 @@ import { auth } from "@/lib/auth";
 import { getBaseUrl } from "@/lib/server-utils";
 import axios from "axios";
 import { and, count, desc, eq } from "drizzle-orm";
+import { cookies } from "next/headers";
 import { db } from "../../../../db";
 import { likes, posts, users } from "../../../../db/schema";
 
@@ -119,5 +120,9 @@ export async function getPost(id: string) {
 }
 
 export async function deletePost(id: string) {
-    await axios.delete(`${await getBaseUrl()}/api/posts/${id}`);
+    await axios.delete(`${await getBaseUrl()}/api/posts/${id}`, {
+        headers: {
+            Cookie: (await cookies()).toString()
+        }
+    });
 }
