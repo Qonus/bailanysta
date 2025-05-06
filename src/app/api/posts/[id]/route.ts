@@ -57,5 +57,4 @@ export async function DELETE(
             headers: { 'Content-Type': 'application/json' }
         });
     }
-    return new Response(null, { status: 204 });
 }

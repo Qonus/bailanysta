@@ -17,7 +17,6 @@ export default async function PostPage(
 ) {
     const { id } = await params;
     const post = await getPost(id);
-
     if (!post) notFound();
 
     const session = await auth();
@@ -47,9 +46,11 @@ export default async function PostPage(
                                 <Username username={post.user?.username || undefined} className="text-xl pr-3" />
                                 <span>{formatRelativeTime(post.created_at, locale)}</span>
                             </div>
-                            <button className="button ghost p-2" onClick={del}>
-                                <Trash className="stroke-destructive" />
-                            </button>
+                            {session.user.id == post.userId &&
+                                <button className="button ghost p-2" onClick={del}>
+                                    <Trash className="stroke-destructive" />
+                                </button>
+                            }
                         </div>
                         <h2 className="text-xl whitespace-pre-line">{post.content}</h2>
                     </div>
