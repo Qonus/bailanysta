@@ -8,6 +8,14 @@ import { cookies } from "next/headers";
 import { db } from "../../../../db";
 import { likes, posts, users } from "../../../../db/schema";
 
+async function getHeaders() {
+    return {
+        headers: {
+            Cookie: (await cookies()).toString()
+        }
+    };
+}
+
 export async function getLike(userId: string, postId: string) {
     const result = await db
         .select()
@@ -46,22 +54,12 @@ export async function unlikePost(id: string) {
 }
 
 export async function getPosts() {
-    const res = await axios.get(`${await getBaseUrl()}/api/posts/`, {
-        headers: {
-            Cookie: (await cookies()).toString()
-        }
-    });
-
+    const res = await axios.get(`${await getBaseUrl()}/api/posts/`, await getHeaders());
     return res.data;
 }
 
 export async function getUserPosts(userId: string) {
-    const res = await axios.get(`${await getBaseUrl()}/api/posts?userid=${userId}`, {
-        headers: {
-            Cookie: (await cookies()).toString()
-        }
-    });
-
+    const res = await axios.get(`${await getBaseUrl()}/api/posts?userid=${userId}`, await getHeaders());
     return res.data;
 }
 
@@ -95,9 +93,5 @@ export async function getPost(id: string) {
 }
 
 export async function deletePost(id: string) {
-    await axios.delete(`${await getBaseUrl()}/api/posts/${id}`, {
-        headers: {
-            Cookie: (await cookies()).toString()
-        }
-    });
+    await axios.delete(`${await getBaseUrl()}/api/posts/${id}`, await getHeaders());
 }
