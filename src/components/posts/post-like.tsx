@@ -19,12 +19,11 @@ export default function PostLike({
     if (!post) return (<h1>Error</h1>)
 
     const handleLike = async () => {
+        setIsLiked(!isLiked);
         if (!isLiked) {
             await likePost(post.id);
-            setIsLiked(true);
         } else {
             await unlikePost(post.id);
-            setIsLiked(false);
         }
     };
 

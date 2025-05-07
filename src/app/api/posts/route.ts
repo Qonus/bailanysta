@@ -1,30 +1,54 @@
 import { auth } from "@/lib/auth";
+import { count, desc, eq } from "drizzle-orm";
 import { NextRequest } from "next/server";
 import { db } from "../../../../db";
-import { posts } from "../../../../db/schema";
+import { likes, posts, users } from "../../../../db/schema";
 
 export async function GET(
-    request: NextRequest   // eslint-disable-line @typescript-eslint/no-unused-vars
+    request: NextRequest
 ) {
-    const data = [
-        {
-            id: '0eeb3d20-5dc0-4666-9249-eb88dbb712cd',
-            userId: '7804cd82-0e7f-4c8c-96d3-0332f4695175',
-            content: 'I just deleted my whole database, a I cooked?',
-            created_at: '2025-04-27T03:14:11.487Z'
-        }
-    ];
-    // const searchParams = request.nextUrl.searchParams;
-    // const userId = searchParams.get('userid');
+    try {
+        const searchParams = request.nextUrl.searchParams;
+        const userId = searchParams.get('userid');
 
-    // const data = await db.query.posts.findMany({
-    //     orderBy: [desc(posts.created_at)],
-    //     where: userId ? eq(posts.userId, userId as string) : undefined,
-    // });
-    return new Response(JSON.stringify(data), {
-        status: 200,
-        headers: { 'Content-Type': 'application/json' }
-    });
+        const data = await db
+            .select({
+                id: posts.id,
+                repostId: posts.repostId,
+                content: posts.content,
+                created_at: posts.created_at,
+                updated_at: posts.updated_at,
+                user: {
+                    id: users.id,
+                    name: users.name,
+                    image: users.image,
+                    username: users.username
+                },
+                likes: count(likes.id)
+            })
+            .from(posts)
+            .leftJoin(users, eq(posts.userId, users.id))
+            .leftJoin(likes, eq(posts.id, likes.postId))
+            .where(
+                userId ? eq(posts.userId, userId) : undefined
+            )
+            .groupBy(posts.id, users.id)
+            .orderBy(desc(posts.created_at));
+
+        return new Response(JSON.stringify(data), {
+            status: 200,
+            headers: { 'Content-Type': 'application/json' }
+        });
+    } catch (e) {
+        console.log(e);
+        return new Response(JSON.stringify({
+            error: "Internal server error",
+            details: e instanceof Error ? e.message : String(e)
+        }), {
+            status: 500,
+            headers: { 'Content-Type': 'application/json' }
+        });
+    }
 }
 
 export async function POST(request: Request) {

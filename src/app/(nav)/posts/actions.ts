@@ -3,7 +3,7 @@
 import { auth } from "@/lib/auth";
 import { getBaseUrl } from "@/lib/server-utils";
 import axios from "axios";
-import { and, count, desc, eq } from "drizzle-orm";
+import { and, count, eq } from "drizzle-orm";
 import { cookies } from "next/headers";
 import { db } from "../../../../db";
 import { likes, posts, users } from "../../../../db/schema";
@@ -46,48 +46,23 @@ export async function unlikePost(id: string) {
 }
 
 export async function getPosts() {
-    // const { data } = await axios.get(`${getBaseUrl()}/api/posts/`);
+    const res = await axios.get(`${await getBaseUrl()}/api/posts/`, {
+        headers: {
+            Cookie: (await cookies()).toString()
+        }
+    });
 
-    const data = await db
-        .select({
-            post: posts,
-            user: users,
-            likesCount: count(likes.id)
-        })
-        .from(posts)
-        .leftJoin(users, eq(posts.userId, users.id))
-        .leftJoin(likes, eq(posts.id, likes.postId))
-        .groupBy(posts.id, users.id)
-        .orderBy(desc(posts.created_at));
-
-    return data.map((item) => ({
-        ...item.post,
-        user: item.user,
-        likes: Number(item.likesCount),
-    }));
+    return res.data;
 }
 
 export async function getUserPosts(userId: string) {
-    // const { data } = await axios.get(`${getBaseUrl()}/api/posts?userid=${userId}`);
+    const res = await axios.get(`${await getBaseUrl()}/api/posts?userid=${userId}`, {
+        headers: {
+            Cookie: (await cookies()).toString()
+        }
+    });
 
-    const data = await db
-        .select({
-            post: posts,
-            user: users,
-            likesCount: count(likes.id)
-        })
-        .from(posts)
-        .leftJoin(users, eq(posts.userId, users.id))
-        .leftJoin(likes, eq(posts.id, likes.postId))
-        .where(eq(posts.userId, userId))
-        .groupBy(posts.id, users.id)
-        .orderBy(desc(posts.created_at));
-
-    return data.map((item) => ({
-        ...item.post,
-        user: item.user,
-        likes: Number(item.likesCount),
-    }));
+    return res.data;
 }
 
 export async function getPost(id: string) {

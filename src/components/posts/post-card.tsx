@@ -22,7 +22,7 @@ export default function PostCard(
                     <div className="">
                         <span className="font-bold inline-block pr-2">{post.user?.name}</span>
                         <Username username={post.user?.username || undefined} className="inline-block pr-2" />
-                        <span className="inline-block">{formatRelativeTime(post.created_at, locale)}</span>
+                        <span className="inline-block">{formatRelativeTime(new Date(post.created_at), locale)}</span>
                     </div>
                     <h2 className="text-lg whitespace-pre-line">{post.content}</h2>
                 </div>
