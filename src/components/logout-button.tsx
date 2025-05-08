@@ -10,9 +10,6 @@ export default function LogoutButton() {
         }
         }>
             <Icons.logout className="size-5" />
-            {/* <span >
-                Logout
-            </span> */}
         </Button>
     );
 }

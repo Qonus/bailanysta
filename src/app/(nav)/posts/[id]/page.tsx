@@ -44,9 +44,9 @@ export default async function PostPage(
                             <div className="flex-wrap">
                                 <span className="text-xl font-bold pr-3">{post.user?.name}</span>
                                 <Username username={post.user?.username || undefined} className="text-xl pr-3" />
-                                <span>{formatRelativeTime(post.created_at, locale)}</span>
+                                <span>{formatRelativeTime(new Date(post.created_at), locale)}</span>
                             </div>
-                            {session.user.id == post.userId &&
+                            {session.user.id == post.user.id &&
                                 <button className="button ghost p-2" onClick={del}>
                                     <Trash className="stroke-destructive" />
                                 </button>

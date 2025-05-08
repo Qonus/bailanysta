@@ -17,7 +17,7 @@ export default function PostButton() {
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
-                <button className="button default justify-center md:w-full" >
+                <button className="button default justify-center md:w-full text-lg" >
                     <Icons.post className="size-7" />
                     <span className="hidden md:block font-bold pr-5">
                         {t("Sidebar.post")}

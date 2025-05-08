@@ -3,10 +3,10 @@
 import { auth } from "@/lib/auth";
 import { getBaseUrl } from "@/lib/server-utils";
 import axios from "axios";
-import { and, count, eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 import { cookies } from "next/headers";
 import { db } from "../../../../db";
-import { likes, posts, users } from "../../../../db/schema";
+import { likes } from "../../../../db/schema";
 
 async function getHeaders() {
     return {
@@ -64,32 +64,8 @@ export async function getUserPosts(userId: string) {
 }
 
 export async function getPost(id: string) {
-    // const { data } = await axios.get(`${getBaseUrl()}/api/posts/${id}`);
-    // const user_response = await fetch(`${getBaseUrl()}/api/users/${post.userId}`, { cache: "no-store" })
-
-    // const post = await db.query.posts.findFirst({
-    //     where: eq(posts.id, id)
-    // });
-
-    const data = await db
-        .select({
-            post: posts,
-            user: users,
-            likesCount: count(likes.id)
-        })
-        .from(posts)
-        .leftJoin(users, eq(posts.userId, users.id))
-        .leftJoin(likes, eq(posts.id, likes.postId))
-        .where(eq(posts.id, id))
-        .groupBy(posts.id, users.id);
-
-    const post = data[0];
-
-    return {
-        ...post.post,
-        user: post.user,
-        likes: Number(post.likesCount),
-    };
+    const post = await axios.get(`${await getBaseUrl()}/api/posts/${id}`, await getHeaders());
+    return post.data;
 }
 
 export async function deletePost(id: string) {

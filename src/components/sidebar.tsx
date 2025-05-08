@@ -45,7 +45,7 @@ export default async function AppSidebar({ user }: { user?: IUser }) {
 					{data.nav.map((item) => (
 						<Tooltip key={item.title} delayDuration={0}>
 							<TooltipTrigger asChild>
-								<button className="button ghost">
+								<button className="button ghost text-lg">
 									<Link href={item.url} className="flex gap-2">
 										{item.icon && <item.icon className="size-7" />}
 										<span className="hidden md:block">{t(item.title)}</span>
@@ -80,7 +80,7 @@ export default async function AppSidebar({ user }: { user?: IUser }) {
 						<button className="button pl-2">
 							<a href={`/users/${user?.username}`} className="flex">
 								<Icons.user className="size-7" />
-								<span className="hidden md:block">{t('profile')}</span>
+								<span className="hidden md:block text-lg">{t('profile')}</span>
 							</a>
 						</button>
 					</DropdownMenuItem>

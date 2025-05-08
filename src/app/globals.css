@@ -129,7 +129,7 @@
   }
 
   .button {
-    @apply rounded-full h-fit text-lg cursor-pointer w-fit p-3 flex gap-2 items-center
+    @apply rounded-full h-fit cursor-pointer w-fit p-3 flex gap-2 items-center
   }
 
   .ghost {
@@ -138,6 +138,10 @@
 
   .default {
     @apply bg-primary text-primary-foreground shadow-xs hover:bg-primary/90
+  }
+
+  .outline {
+    @apply outline-none border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50
   }
 
   .input {

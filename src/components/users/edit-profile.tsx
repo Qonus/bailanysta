@@ -5,7 +5,6 @@ import { IUser } from "@/types/tables";
 import { DialogTitle } from "@radix-ui/react-dialog";
 import { useTranslations } from "next-intl";
 import UsernameForm from "../forms/username-form";
-import { Button } from "../ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog";
 
 export default function EditProfileButton({ user, className }: { user?: IUser, className?: string }) {
@@ -14,7 +13,9 @@ export default function EditProfileButton({ user, className }: { user?: IUser, c
     return (
         <Dialog>
             <DialogTrigger className={cn("", className)} asChild>
-                <Button variant="outline" className="rounded-full">{t("Profile.edit")}</Button>
+                <button className="button outline p-2">
+                    {t("Profile.edit")}
+                </button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
                 <DialogTitle>
